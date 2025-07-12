@@ -1,112 +1,112 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+このファイルは、このリポジトリでコードを操作する際のClaude Code (claude.ai/code) へのガイダンスを提供します。
 
-## Project Overview
+## プロジェクト概要
 
-This is a Flutter application project for a children's Scratch learning website. The project is built using Flutter SDK ^3.7.2 and supports web, Android, and iOS platforms. The goal is to convert this from a mobile app to a web service for teaching programming concepts to children through Scratch.
+これは子供向けScratch学習ウェブサイトのSingle Page Application (SPA)プロジェクトです。HTML、CSS、JavaScriptを使用して構築されており、シンプルなWeb技術スタックで実装されています。目標は、Scratchプログラミング概念を子供たちに分かりやすく教える教育用Webサイトを提供することです。
 
-## Development Commands
+## 開発ルール
 
-### Dependencies and Setup
+### HTMLファイル修正ルール
+- **既存のHTMLファイルを直接修正する**
+- **新しいHTMLファイルを作成しない**
+- **類似のHTMLファイルを作成せず、既存ファイルを編集する**
+- ファイル数の増加を避け、どのファイルが使用されているか分からなくなることを防ぐ
+
+## 開発・実行方法
+
+### 基本実行（Webサーバー不要）
 ```bash
-flutter pub get          # Install dependencies
-flutter pub upgrade      # Update dependencies
-flutter pub outdated     # Check for outdated dependencies
+# ファイルをブラウザで直接開く
+open index.html  # macOS
+start index.html # Windows
+xdg-open index.html # Linux
+
+# または、ブラウザのファイル→開くでindex.htmlを選択
 ```
 
-### Running the Application
+### 開発時のWebサーバー（オプション）
 ```bash
-flutter run              # Run on connected device/emulator
-flutter run -d web-server # Run as web server for development
-flutter run -d chrome    # Run in Chrome browser
-flutter run -d ios       # Run specifically on iOS simulator
-flutter run -d android   # Run specifically on Android emulator
-flutter run --release    # Run optimized release build
+# 開発時にWebサーバーを使用する場合（任意）
+python -m http.server 8000  # Python 3
+npx http-server .           # Node.js
+
+# Visual Studio Code Live Serverエクステンション使用も可能
 ```
 
-### Code Quality and Analysis
+### ファイル確認
 ```bash
-flutter analyze          # Run static analysis (uses analysis_options.yaml)
-flutter format .         # Format all Dart files
-flutter format --dry-run # Check formatting without applying changes
+# プロジェクト構造の確認
+ls -la
+
+# HTMLファイルの構文チェック
+# ブラウザの開発者ツールで確認
 ```
 
-### Testing
-```bash
-flutter test             # Run all tests
-flutter test test/widget_test.dart  # Run specific test file
-flutter test --coverage # Run tests with coverage report
-```
+## プロジェクト構造
 
-### Building
-```bash
-flutter build apk        # Build Android APK
-flutter build ios        # Build iOS app (requires Xcode)
-flutter build web        # Build web version
-flutter clean            # Clean build artifacts
-```
+- `index.html` - メインアプリケーションファイル（SPA）
+- `assets/` - 画像やアイコンなどの静的ファイル
+  - `icon/app_icon.png` - アプリケーションアイコン
+- `docs/` - プロジェクト仕様書とドキュメント
+  - `SPA構造仕様書.md` - アプリケーション構造の詳細仕様
+  - `HTMLファイル使用状況調査.md` - ファイル管理状況
+- `tests/` - テスト用HTMLファイル
+- `archive/` - 旧バージョンのHTMLファイル
 
-## Project Structure
+## 技術スタック
 
-- `lib/main.dart` - Main application entry point with basic counter demo
-- `test/widget_test.dart` - Widget tests for the main application
-- `android/` - Android-specific configuration and build files
-- `ios/` - iOS-specific configuration and build files
-- `pubspec.yaml` - Flutter project configuration and dependencies
-- `analysis_options.yaml` - Dart/Flutter linting configuration (uses flutter_lints)
+### フロントエンド
+- **HTML5**: セマンティックマークアップ
+- **CSS3**: 
+  - Flexbox/Gridレイアウト
+  - カスタムアニメーション
+  - レスポンシブデザイン
+- **JavaScript (ES6+)**:
+  - DOM操作によるSPA実装
+  - セクション切り替え機能
+  - 動的コンテンツ生成
 
-## Key Configuration Details
+### デザイン
+- Material Design風のコンポーネント
+- Scratchオリジナルの色使い（紫、オレンジテーマ）
+- 子供向けの分かりやすいUI/UX
 
-### Android Configuration
-- Package name: `jp.nyanitpass.temp_nyan_it_passport`
-- Minimum SDK: 21 (Android 5.0)
-- Custom launcher icon configured via `flutter_launcher_icons`
-- Signing configuration present in `android/key.properties`
+## 実装済み機能
 
-### iOS Configuration
-- Standard FlutterActivity with GeneratedPluginRegistrant
-- Custom app icons configured for all required sizes
-- Launch screen with custom branding
+### SPA構造とナビゲーション
+- **ホームページ**: レッスン選択のメインダッシュボード
+- **セクション切り替え**: JavaScriptによるシームレスな画面遷移
+- **プログレッシブステップ**: 段階的な学習進行システム
 
-### Dependencies
-- `cupertino_icons: ^1.0.8` - iOS-style icons
-- `flutter_lints: ^5.0.0` - Code quality enforcement
-- `flutter_launcher_icons: ^0.14.1` - Custom app icon generation
+### 学習セクション
+- **プログラムの流れ**: 順次実行の概念（6ステップ）
+- **ループ**: 繰り返し処理の理解（6ステップ）
+- **座標システム**: ステージ位置と座標（4ステップ）
+- **条件分岐**: if-then、if-else論理
+- **変数システム**: HP、スコア計算
+- **コスチューム**: スプライトの見た目変更（4ステップ）
+- **クローン機能**: オブジェクトの複製システム
 
-## Implemented Features
+### Scratchブロック表現
+- **視覚的ブロック**: CSS/HTMLによるScratchライクなブロック表現
+- **カテゴリ別色分け**:
+  - Motion（青色 #4C97FF）
+  - Looks（紫色 #9966FF）
+  - Control（オレンジ色 #FFAB19）
+  - Events（黄色 #FFD500）
+- **インタラクティブ要素**: クリック、ホバー効果
 
-### Scratch Learning Website
-- **Home Page**: Child-friendly interface with colorful learning cards
-- **Learning Sections**: Separate lessons for Motion, Looks, and Control blocks
-- **Block Renderer**: Visual representation of Scratch blocks from text input
-- **Interactive Testing**: Text-to-block conversion system for experimentation
+### ユーザビリティ
+- **子供向けデザイン**: 大きなボタン、分かりやすいアイコン
+- **日本語対応**: 完全な日本語インターフェース
+- **レスポンシブ**: デスクトップ、タブレット対応
 
-### Scratch Block Rendering System
-- **Authentic Appearance**: Blocks styled to match real Scratch colors and shapes
-- **Block Types Supported**:
-  - Motion (Blue #4C97FF): move, turn, go to
-  - Looks (Purple #9966FF): say, think, show, hide
-  - Control (Orange #FFAB19): repeat, forever, if/then, wait
-  - Events (Yellow #FFD500): when flag clicked, when key pressed
-- **Visual Features**:
-  - Puzzle-piece connectors (notches and tabs)
-  - Drop shadows and gradients
-  - Category-specific icons
-  - Rounded corners and proper spacing
+## 開発ノート
 
-### Text Parser
-- Converts natural language text to visual Scratch blocks
-- Supports nested control structures
-- Recognizes common Scratch programming patterns
-- Real-time block generation and preview
-
-## Development Notes
-
-- Built with Flutter for cross-platform web deployment
-- Uses CustomPainter for precise block rendering
-- Material Design 3 with custom orange theme
-- Target audience: Children learning programming through Scratch
-- Primary platform target: Web service (with mobile support)
-- Tests use the `flutter_test` framework for widget testing
-- Linting is configured via `flutter_lints` package with standard Flutter recommendations
+- **純粋なWeb技術**: フレームワーク依存なしのシンプル構成
+- **教育特化**: プログラミング初心者（子供）向けに最適化
+- **メンテナンス性**: 単一HTMLファイルでの管理
+- **拡張性**: 新しいレッスンやセクションの追加が容易
+- **デプロイ**: 静的ファイルホスティングで簡単にデプロイ可能
