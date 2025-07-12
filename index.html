@@ -2212,6 +2212,7 @@ y座標を (120) にする :: motion
         <div class="step-nav">
             <button class="btn" id="healthPrevBtn" onclick="changeHealthStep(-1)" disabled>前へ</button>
             <button class="btn" id="healthNextBtn" onclick="changeHealthStep(1)">次へ</button>
+            <button class="btn" onclick="showHome()" style="background: #666;">ホームに戻る</button>
         </div>
     </div>
 
@@ -2406,6 +2407,7 @@ y座標を (120) にする :: motion
         <div class="step-nav">
             <button class="btn" id="scorePrevBtn" onclick="changeScoreStep(-1)" disabled>前へ</button>
             <button class="btn" id="scoreNextBtn" onclick="changeScoreStep(1)">次へ</button>
+            <button class="btn" onclick="showHome()" style="background: #666;">ホームに戻る</button>
         </div>
     </div>
 
@@ -2582,6 +2584,7 @@ y座標を (120) にする :: motion
         <div class="step-nav">
             <button class="btn" id="stringPrevBtn" onclick="changeStringStep(-1)" disabled>前へ</button>
             <button class="btn" id="stringNextBtn" onclick="changeStringStep(1)">次へ</button>
+            <button class="btn" onclick="showHome()" style="background: #666;">ホームに戻る</button>
         </div>
     </div>
 
@@ -4350,6 +4353,7 @@ y座標を ((y座標 :: motion) + (10)) にする :: motion
         <div class="step-nav">
             <button class="btn" id="ifPrevBtn" onclick="changeIfStep(-1)" disabled>前へ</button>
             <button class="btn" id="ifNextBtn" onclick="changeIfStep(1)">次へ</button>
+            <button class="btn" onclick="showHome()" style="background: #666;">ホームに戻る</button>
         </div>
     </div>
 
@@ -4561,6 +4565,7 @@ y座標を ((y座標 :: motion) + (10)) にする :: motion
         <div class="step-nav">
             <button class="btn" id="ifelsePrevBtn" onclick="changeIfElseStep(-1)" disabled>前へ</button>
             <button class="btn" id="ifelseNextBtn" onclick="changeIfElseStep(1)">次へ</button>
+            <button class="btn" onclick="showHome()" style="background: #666;">ホームに戻る</button>
         </div>
     </div>
 
@@ -4777,8 +4782,14 @@ y座標を ((y座標 :: motion) + (10)) にする :: motion
         function showProgramFlow() {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('program-flow').style.display = 'block';
-            document.getElementById('conditional-if').style.display = 'none';
-            document.getElementById('conditional-ifelse').style.display = 'none';
+            
+            // 存在する要素のみnullチェックしてから操作
+            const conditionalIf = document.getElementById('conditional-if');
+            if (conditionalIf) conditionalIf.style.display = 'none';
+            
+            const conditionalIfelse = document.getElementById('conditional-ifelse');
+            if (conditionalIfelse) conditionalIfelse.style.display = 'none';
+            
             currentStep = 1;
             updateStep();
             // 再レンダリングを完全に無効化して色分けを維持
@@ -6595,10 +6606,15 @@ y座標を ((y座標 :: motion) + (10)) にする :: motion
             document.getElementById('ifelse-step-title').textContent = `ステップ ${currentIfElseStep} / 4`;
             document.getElementById('ifelse-progress').style.width = (currentIfElseStep / 4 * 100) + '%';
             
-            // Update buttons
-            document.getElementById('ifElsePrevBtn').disabled = currentIfElseStep === 1;
-            document.getElementById('ifElseNextBtn').disabled = currentIfElseStep === 4;
-            document.getElementById('ifElseNextBtn').textContent = currentIfElseStep === 4 ? '完了' : '次へ';
+            // Update buttons (防御的プログラミング - null チェック)
+            const prevBtn = document.getElementById('ifelsePrevBtn');
+            const nextBtn = document.getElementById('ifelseNextBtn');
+            
+            if (prevBtn) prevBtn.disabled = currentIfElseStep === 1;
+            if (nextBtn) {
+                nextBtn.disabled = currentIfElseStep === 4;
+                nextBtn.textContent = currentIfElseStep === 4 ? '完了' : '次へ';
+            }
         }
         
         // Animation functions for conditional demonstrations

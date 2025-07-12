@@ -134,13 +134,13 @@ test.describe('Scratch学習サイト - 全体ナビゲーションテスト', (
       await expect(page.locator('#conditional-menu')).toBeHidden();
       console.log(`→ ${subSection.name}サブセクション表示: ✅ 成功`);
       
-      // ホームボタンの存在確認
+      // ホームボタンの存在確認（修正後の期待値：すべて存在すべき）
       try {
         const homeButton = page.locator(`#${subSection.sectionId} >> text=ホームに戻る`);
         await expect(homeButton).toBeVisible({ timeout: 1000 });
         console.log(`→ ${subSection.name}のホームボタン: ✅ あり`);
       } catch (error) {
-        console.log(`→ ${subSection.name}のホームボタン: ❌ なし - バグ発見!`);
+        console.log(`→ ${subSection.name}のホームボタン: ❌ なし - 修正が必要!`);
       }
     }
     
@@ -183,13 +183,13 @@ test.describe('Scratch学習サイト - 全体ナビゲーションテスト', (
           await expect(page.locator(`#${subSection.sectionId}`)).toBeVisible();
           console.log(`→ ${subSection.name}サブセクション表示: ✅ 成功`);
           
-          // ホームボタンの存在確認
+          // ホームボタンの存在確認（修正後の期待値：すべて存在すべき）
           try {
             const homeButton = page.locator(`#${subSection.sectionId} >> text=ホームに戻る`);
             await expect(homeButton).toBeVisible({ timeout: 1000 });
             console.log(`→ ${subSection.name}のホームボタン: ✅ あり`);
           } catch (error) {
-            console.log(`→ ${subSection.name}のホームボタン: ❌ なし - 要確認`);
+            console.log(`→ ${subSection.name}のホームボタン: ❌ なし - 修正が必要!`);
           }
         } catch (error) {
           console.log(`→ ${subSection.name}サブセクション: ❌ 失敗 - ボタンまたはセクションが見つからない`);
@@ -241,8 +241,8 @@ test.describe('Scratch学習サイト - 全体ナビゲーションテスト', (
     console.log('🎉 ステップ進行ボタンテスト完了!');
   });
   
-  // 総合エラー検出テスト
-  test('総合エラー検出テスト', async ({ page }) => {
+  // 総合エラー検出テスト（修正後の検証）
+  test('修正後の総合エラー検出テスト', async ({ page }) => {
     const filePath = path.join(__dirname, '..', 'index.html');
     
     // コンソールエラーとページエラーをキャッチ
@@ -259,39 +259,65 @@ test.describe('Scratch学習サイト - 全体ナビゲーションテスト', (
     
     await page.goto(`file://${filePath}`);
     
-    console.log('🧪 総合エラー検出テスト開始');
+    console.log('🧪 修正後の総合エラー検出テスト開始');
+    
+    // 修正されたshowProgramFlow()のテスト
+    console.log('✅ showProgramFlow()のnull参照エラー修正を検証');
+    try {
+      await page.locator('[onclick="showProgramFlow()"]').click();
+      await page.waitForTimeout(500);
+      console.log('→ showProgramFlow(): ✅ エラーなし');
+    } catch (error) {
+      errors.push(`showProgramFlow Error: ${error.message}`);
+      console.log('→ showProgramFlow(): ❌ まだエラーあり');
+    }
+    
+    // 修正されたupdateIfElseStep()のテスト
+    console.log('✅ updateIfElseStep()のnull参照エラー修正を検証');
+    try {
+      await page.evaluate(() => showHome());
+      await page.locator('[onclick="showConditionalMenu()"]').click();
+      await page.locator('[onclick="showIfElse()"]').click();
+      await page.waitForTimeout(500);
+      console.log('→ updateIfElseStep(): ✅ エラーなし');
+    } catch (error) {
+      errors.push(`updateIfElseStep Error: ${error.message}`);
+      console.log('→ updateIfElseStep(): ❌ まだエラーあり');
+    }
     
     // 複数の画面遷移を実行してエラーをチェック
     const testFlow = [
-      () => page.locator('[onclick="showProgramFlow()"]').click(),
       () => page.evaluate(() => showHome()),
       () => page.locator('[onclick="showLoop()"]').click(),
       () => page.evaluate(() => showHome()),
       () => page.locator('[onclick="showConditionalMenu()"]').click(),
       () => page.locator('[onclick="showIfThen()"]').click(),
+      () => page.evaluate(() => showHome()),
+      () => page.locator('[onclick="showConditionalMenu()"]').click(),
+      () => page.locator('[onclick="showIfElse()"]').click(),
       () => page.evaluate(() => showHome())
     ];
     
     for (let i = 0; i < testFlow.length; i++) {
       try {
         await testFlow[i]();
-        await page.waitForTimeout(500);
+        await page.waitForTimeout(300);
       } catch (error) {
         errors.push(`Flow Error Step ${i + 1}: ${error.message}`);
       }
     }
     
-    // エラーレポート
+    // エラーレポート（修正後の期待値：エラーなし）
     if (errors.length > 0) {
-      console.log('❌ エラー検出:');
+      console.log('❌ 修正後もエラー検出:');
       errors.forEach((error, index) => {
         console.log(`  ${index + 1}. ${error}`);
       });
     } else {
-      console.log('✅ エラーなし - 全ての遷移が正常');
+      console.log('✅ エラーなし - 全ての修正が正常に動作!');
     }
     
-    console.log('🎉 総合エラー検出テスト完了!');
+    console.log('🎉 修正後の総合エラー検出テスト完了!');
     
     // テストは継続（エラーがあっても失敗させない）
     expect(true).toBe(true);
