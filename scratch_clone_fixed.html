@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch学習サイト - クローン修正版</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <style>
+        body {
+            font-family: 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', 'Meiryo', 'メイリオ', 'MS PGothic', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f5ff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+        .header {
+            background: #7C3F9E;
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(124, 63, 158, 0.3);
+            border: 3px solid #fff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .lesson-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 
+                0 6px 20px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.6);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            position: relative;
+            overflow: hidden;
+        }
+        .lesson-card:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+            border-color: #7C3F9E;
+        }
+        .lesson-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #7C3F9E;
+        }
+        .emoji {
+            font-size: 56px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        .lesson-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+            letter-spacing: 0.5px;
+        }
+        .lesson-desc {
+            color: #5a6c7d;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .step-container {
+            display: none;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            border: 2px solid #e3f2fd;
+            position: relative;
+        }
+        .step-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #7C3F9E;
+            border-radius: 20px 20px 0 0;
+        }
+        .step-active {
+            display: block;
+        }
+        .animation-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px solid #e9ecef;
+            min-height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+        .sprite {
+            width: 40px;
+            height: 40px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            position: absolute;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+        }
+        .speech-bubble {
+            position: absolute;
+            background: white;
+            border: 2px solid #333;
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 14px;
+            font-weight: bold;
+            display: none;
+            z-index: 10;
+        }
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 20px;
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid white;
+        }
+        .btn {
+            background: #7C3F9E;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(124, 63, 158, 0.3);
+        }
+        .btn:hover {
+            background: #6a2c85;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(124, 63, 158, 0.4);
+        }
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #7C3F9E, #9b59b6);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+        .status-display {
+            background: #e8f4fd;
+            border: 2px solid #4A90E2;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-weight: bold;
+            color: #2c3e50;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Scratch学習サイト - クローン修正版</h1>
+            <p>クローン機能を学ぼう！</p>
+        </div>
+
+        <div id="home-view">
+            <div class="lesson-grid">
+                <div class="lesson-card" onclick="showClonesMenu()">
+                    <div class="emoji">🧬</div>
+                    <div class="lesson-title">クローン機能</div>
+                    <div class="lesson-desc">スプライトを複製して活用しよう！</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="clones-menu" style="display: none;">
+            <div class="lesson-grid">
+                <div class="lesson-card" onclick="showBasicClone()">
+                    <div class="emoji">🧬</div>
+                    <div class="lesson-title">基本的なクローン作成</div>
+                    <div class="lesson-desc">クローンを作る基本を学ぼう！</div>
+                </div>
+                <div class="lesson-card" onclick="showHome()">
+                    <div class="emoji">🏠</div>
+                    <div class="lesson-title">ホームに戻る</div>
+                    <div class="lesson-desc">メインメニューに戻る</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="basic-clone-section" style="display: none;">
+            <div class="progress-bar">
+                <div id="clone-basic-progress" class="progress-fill" style="width: 25%"></div>
+            </div>
+            <h2 id="clone-basic-step-title">ステップ 1 / 1</h2>
+
+            <div id="clone-basic-step1" class="step-container step-active">
+                <h3>🧬 基本的なクローン作成</h3>
+                <p>クローンを作る基本的な仕組みを学びましょう。</p>
+                
+                <div class="animation-container">
+                    <div id="sprite-clone-basic" class="sprite" style="left: 50px; top: 50px;">😸</div>
+                    <div id="speech-bubble-clone-basic" class="speech-bubble"></div>
+                </div>
+                
+                <div id="clone-basic-status" class="status-display">
+                    クローンが作られる様子を見てみよう！
+                </div>
+                
+                <div style="text-align: center; margin-top: 20px;">
+                    <button class="btn" onclick="playBasicCloneAnimation()">🎬 アニメーション開始</button>
+                    <button class="btn" onclick="resetBasicCloneAnimation()">🔄 リセット</button>
+                    <button class="btn" onclick="showClonesMenu()">🏠 メニューに戻る</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('=== FIXED VERSION LOADED - ' + new Date().toLocaleTimeString() + ' ===');
+
+        // Hide all views function
+        function hideAllViews() {
+            console.log('=== FIXED hideAllViews called ===');
+            const elements = [
+                'home-view',
+                'clones-menu',
+                'basic-clone-section'
+            ];
+            
+            elements.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.style.display = 'none';
+                }
+            });
+            console.log('=== FIXED hideAllViews completed ===');
+        }
+
+        // Show home
+        function showHome() {
+            console.log('=== FIXED showHome called ===');
+            hideAllViews();
+            document.getElementById('home-view').style.display = 'block';
+        }
+
+        // Show clones menu
+        function showClonesMenu() {
+            console.log('=== FIXED showClonesMenu called ===');
+            hideAllViews();
+            document.getElementById('clones-menu').style.display = 'block';
+        }
+
+        // Show basic clone
+        function showBasicClone() {
+            console.log('=== FIXED showBasicClone called ===');
+            hideAllViews();
+            document.getElementById('basic-clone-section').style.display = 'block';
+        }
+
+        // Basic clone animation with comprehensive error handling
+        function playBasicCloneAnimation() {
+            try {
+                console.log('=== FIXED playBasicCloneAnimation called ===');
+                const sprite = document.getElementById('sprite-clone-basic');
+                const bubble = document.getElementById('speech-bubble-clone-basic');
+                const status = document.getElementById('clone-basic-status');
+                
+                console.log('Animation elements:', {sprite, bubble, status});
+                
+                if (!sprite || !bubble || !status) {
+                    console.error('Required elements not found for basic clone animation');
+                    if (status) {
+                        status.textContent = 'エラー: アニメーション要素が見つかりません';
+                    } else {
+                        alert('アニメーション要素が見つかりません。');
+                    }
+                    return;
+                }
+                
+                // Reset first
+                try {
+                    resetBasicCloneAnimation();
+                } catch (resetError) {
+                    console.error('Error during reset:', resetError);
+                    status.textContent = 'リセット中にエラーが発生しました';
+                    return;
+                }
+                
+                // Start animation
+                status.textContent = '🧬 クローン作成開始...';
+                
+                // Create 3 clones with delay
+                for (let i = 1; i <= 3; i++) {
+                    setTimeout(() => {
+                        try {
+                            const currentSprite = document.getElementById('sprite-clone-basic');
+                            const currentStatus = document.getElementById('clone-basic-status');
+                            const currentBubble = document.getElementById('speech-bubble-clone-basic');
+                            
+                            if (!currentSprite || !currentStatus || !currentBubble) {
+                                console.error(`Elements missing during animation step ${i}`);
+                                return;
+                            }
+                            
+                            const clone = currentSprite.cloneNode(true);
+                            clone.id = `clone-${i}`;
+                            clone.style.left = (50 + i * 80) + 'px';
+                            clone.style.top = (50 + i * 20) + 'px';
+                            clone.style.filter = `hue-rotate(${i * 60}deg)`;
+                            
+                            if (currentSprite.parentNode) {
+                                currentSprite.parentNode.appendChild(clone);
+                                currentStatus.textContent = `🎉 クローン${i}個目が作られました！`;
+                                
+                                // Make clone say hello
+                                setTimeout(() => {
+                                    try {
+                                        if (document.getElementById(`clone-${i}`) && currentBubble) {
+                                            currentBubble.textContent = `こんにちは！クローン${i}です`;
+                                            currentBubble.style.display = 'block';
+                                            currentBubble.style.left = (150 + i * 80) + 'px';
+                                            currentBubble.style.top = (20 + i * 20) + 'px';
+                                        }
+                                    } catch (bubbleError) {
+                                        console.error('Error showing bubble:', bubbleError);
+                                    }
+                                }, 500);
+                                
+                                setTimeout(() => {
+                                    try {
+                                        if (currentBubble) {
+                                            currentBubble.style.display = 'none';
+                                        }
+                                    } catch (hideBubbleError) {
+                                        console.error('Error hiding bubble:', hideBubbleError);
+                                    }
+                                }, 1500);
+                            }
+                        } catch (cloneError) {
+                            console.error(`Error creating clone ${i}:`, cloneError);
+                            const errorStatus = document.getElementById('clone-basic-status');
+                            if (errorStatus) {
+                                errorStatus.textContent = `クローン${i}作成中にエラーが発生しました`;
+                            }
+                        }
+                    }, i * 1000);
+                }
+                
+                setTimeout(() => {
+                    try {
+                        const finalStatus = document.getElementById('clone-basic-status');
+                        if (finalStatus) {
+                            finalStatus.textContent = '✅ 3個のクローンが作成完了！それぞれが独立して存在しています。';
+                        }
+                    } catch (finalError) {
+                        console.error('Error in final status update:', finalError);
+                    }
+                }, 4000);
+                
+            } catch (mainError) {
+                console.error('Main animation error:', mainError);
+                const errorStatus = document.getElementById('clone-basic-status');
+                if (errorStatus) {
+                    errorStatus.textContent = 'アニメーション中にエラーが発生しました。リセットしてもう一度お試しください。';
+                } else {
+                    alert('アニメーション中にエラーが発生しました。ページをリロードしてください。');
+                }
+            }
+        }
+
+        // Reset basic clone animation with error handling
+        function resetBasicCloneAnimation() {
+            try {
+                console.log('=== FIXED resetBasicCloneAnimation called ===');
+                const sprite = document.getElementById('sprite-clone-basic');
+                const bubble = document.getElementById('speech-bubble-clone-basic');
+                const status = document.getElementById('clone-basic-status');
+                
+                console.log('Reset elements:', {sprite, bubble, status});
+                
+                if (!sprite || !bubble || !status) {
+                    console.error('Required elements not found for reset');
+                    if (status) {
+                        status.textContent = 'リセット要素が見つかりません';
+                    }
+                    return;
+                }
+                
+                // Remove all existing clones safely
+                try {
+                    const clones = document.querySelectorAll('[id^="clone-"]');
+                    console.log('Found clones to remove:', clones.length);
+                    clones.forEach((clone, index) => {
+                        try {
+                            clone.remove();
+                            console.log(`Removed clone ${index + 1}`);
+                        } catch (removeError) {
+                            console.error(`Error removing clone ${index + 1}:`, removeError);
+                        }
+                    });
+                } catch (queryError) {
+                    console.error('Error querying clones:', queryError);
+                }
+                
+                // Reset sprite safely
+                try {
+                    sprite.style.left = '50px';
+                    sprite.style.top = '50px';
+                    sprite.style.filter = 'none';
+                    console.log('Sprite position reset');
+                } catch (spriteError) {
+                    console.error('Error resetting sprite:', spriteError);
+                }
+                
+                // Reset bubble safely
+                try {
+                    bubble.style.display = 'none';
+                    console.log('Bubble hidden');
+                } catch (bubbleError) {
+                    console.error('Error resetting bubble:', bubbleError);
+                }
+                
+                // Reset status safely
+                try {
+                    status.textContent = 'クローンが作られる様子を見てみよう！';
+                    console.log('Status reset');
+                } catch (statusError) {
+                    console.error('Error resetting status:', statusError);
+                }
+                
+                console.log('=== Reset completed successfully ===');
+                
+            } catch (mainResetError) {
+                console.error('Main reset error:', mainResetError);
+                alert('リセット中にエラーが発生しました。ページをリロードしてください。');
+            }
+        }
+
+        // Global error handler to prevent white screen
+        window.addEventListener('error', function(event) {
+            console.error('Global error caught:', event.error);
+            const status = document.getElementById('clone-basic-status');
+            if (status) {
+                status.textContent = 'エラーが発生しました。リセットボタンを押してもう一度お試しください。';
+            }
+            // Prevent the error from causing a white screen
+            event.preventDefault();
+            return true;
+        });
+
+        window.addEventListener('unhandledrejection', function(event) {
+            console.error('Unhandled promise rejection:', event.reason);
+            const status = document.getElementById('clone-basic-status');
+            if (status) {
+                status.textContent = 'エラーが発生しました。リセットボタンを押してもう一度お試しください。';
+            }
+            // Prevent the error from causing a white screen
+            event.preventDefault();
+        });
+
+        // Initialize when page loads
+        window.addEventListener('load', function() {
+            console.log('=== FIXED VERSION PAGE LOADED ===');
+            
+            // Test all elements are present
+            const sprite = document.getElementById('sprite-clone-basic');
+            const bubble = document.getElementById('speech-bubble-clone-basic');
+            const status = document.getElementById('clone-basic-status');
+            
+            console.log('Initial element check:', {sprite, bubble, status});
+            
+            if (!sprite || !bubble || !status) {
+                console.error('Some elements are missing on page load');
+            } else {
+                console.log('All elements found successfully');
+            }
+        });
+    </script>
+</body>
+</html>

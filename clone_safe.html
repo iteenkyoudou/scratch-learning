@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クローン機能 - 安全版</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f8f5ff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .header {
+            background: #7C3F9E;
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .animation-area {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            height: 300px;
+            position: relative;
+            overflow: visible;
+        }
+        .sprite {
+            width: 50px;
+            height: 50px;
+            background: #ff6b6b;
+            border-radius: 50%;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            border: 3px solid #333;
+        }
+        .btn {
+            background: #7C3F9E;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 10px;
+        }
+        .status {
+            background: #e8f4fd;
+            border: 2px solid #4A90E2;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧬 クローン機能 - 安全版</h1>
+            <p>シンプルで確実なクローン作成</p>
+        </div>
+
+        <div class="animation-area" id="animation-area">
+            <div id="main-sprite" class="sprite" style="left: 50px; top: 50px;">😸</div>
+        </div>
+        
+        <div id="status" class="status">
+            準備完了
+        </div>
+        
+        <div style="text-align: center;">
+            <button class="btn" onclick="createOneClone()">1つクローン作成</button>
+            <button class="btn" onclick="createThreeClones()">3つクローン作成</button>
+            <button class="btn" onclick="clearAll()">すべてクリア</button>
+            <button class="btn" onclick="showInfo()">情報表示</button>
+        </div>
+    </div>
+
+    <script>
+        console.log('安全版クローン機能開始');
+
+        function createOneClone() {
+            console.log('=== 1つクローン作成開始 ===');
+            
+            try {
+                const sprite = document.getElementById('main-sprite');
+                const area = document.getElementById('animation-area');
+                const status = document.getElementById('status');
+                
+                if (!sprite || !area || !status) {
+                    console.error('要素が見つかりません');
+                    alert('要素が見つかりません');
+                    return;
+                }
+                
+                console.log('元スプライト:', sprite);
+                console.log('アニメーション領域:', area);
+                
+                // クローンを作成
+                const clone = sprite.cloneNode(true);
+                clone.id = 'test-clone-1';
+                clone.style.left = '200px';
+                clone.style.top = '100px';
+                clone.style.background = 'blue';
+                
+                console.log('作成したクローン:', clone);
+                console.log('クローンのスタイル:', clone.style.cssText);
+                
+                // 親要素に追加
+                area.appendChild(clone);
+                
+                console.log('クローンを追加しました');
+                
+                // 追加されたか確認
+                const addedClone = document.getElementById('test-clone-1');
+                console.log('追加されたクローン:', addedClone);
+                
+                if (addedClone) {
+                    const rect = addedClone.getBoundingClientRect();
+                    console.log('クローンの位置情報:', rect);
+                    status.textContent = '✅ クローン1個作成成功！';
+                } else {
+                    console.error('クローンが見つかりません');
+                    status.textContent = '❌ クローン作成失敗';
+                }
+                
+            } catch (error) {
+                console.error('エラー:', error);
+                document.getElementById('status').textContent = 'エラー: ' + error.message;
+            }
+            
+            console.log('=== 1つクローン作成終了 ===');
+        }
+
+        function createThreeClones() {
+            console.log('=== 3つクローン作成開始 ===');
+            
+            try {
+                const sprite = document.getElementById('main-sprite');
+                const area = document.getElementById('animation-area');
+                const status = document.getElementById('status');
+                
+                if (!sprite || !area || !status) {
+                    console.error('要素が見つかりません');
+                    return;
+                }
+                
+                // 既存のクローンをクリア
+                clearAll();
+                
+                // 3つのクローンを作成
+                for (let i = 1; i <= 3; i++) {
+                    console.log(`クローン${i}作成中...`);
+                    
+                    const clone = sprite.cloneNode(true);
+                    clone.id = `multi-clone-${i}`;
+                    clone.style.left = (50 + i * 100) + 'px';
+                    clone.style.top = (50 + i * 30) + 'px';
+                    clone.style.background = `hsl(${i * 120}, 70%, 60%)`;
+                    
+                    console.log(`クローン${i}のスタイル:`, clone.style.cssText);
+                    
+                    area.appendChild(clone);
+                    
+                    const addedClone = document.getElementById(`multi-clone-${i}`);
+                    console.log(`クローン${i}追加確認:`, addedClone);
+                }
+                
+                status.textContent = '✅ 3つのクローン作成完了！';
+                
+            } catch (error) {
+                console.error('エラー:', error);
+                document.getElementById('status').textContent = 'エラー: ' + error.message;
+            }
+            
+            console.log('=== 3つクローン作成終了 ===');
+        }
+
+        function clearAll() {
+            console.log('=== クリア開始 ===');
+            
+            const clones = document.querySelectorAll('[id*="clone"]');
+            console.log('削除対象クローン数:', clones.length);
+            
+            clones.forEach((clone, index) => {
+                console.log(`クローン${index + 1}(${clone.id})を削除`);
+                clone.remove();
+            });
+            
+            document.getElementById('status').textContent = 'すべてクリア完了';
+            console.log('=== クリア終了 ===');
+        }
+
+        function showInfo() {
+            console.log('=== 情報表示開始 ===');
+            
+            const area = document.getElementById('animation-area');
+            const allChildren = area.children;
+            
+            console.log('アニメーション領域:', area);
+            console.log('子要素数:', allChildren.length);
+            
+            for (let i = 0; i < allChildren.length; i++) {
+                const child = allChildren[i];
+                const rect = child.getBoundingClientRect();
+                console.log(`要素${i + 1}:`, {
+                    id: child.id,
+                    className: child.className,
+                    innerHTML: child.innerHTML,
+                    style: child.style.cssText,
+                    computedStyle: {
+                        display: getComputedStyle(child).display,
+                        position: getComputedStyle(child).position,
+                        left: getComputedStyle(child).left,
+                        top: getComputedStyle(child).top
+                    },
+                    boundingRect: rect
+                });
+            }
+            
+            const clones = document.querySelectorAll('[id*="clone"]');
+            console.log('クローン要素:', clones);
+            
+            document.getElementById('status').textContent = `情報表示: 要素${allChildren.length}個、クローン${clones.length}個`;
+            
+            console.log('=== 情報表示終了 ===');
+        }
+
+        // ページロード時
+        window.addEventListener('load', function() {
+            console.log('ページロード完了');
+            showInfo();
+        });
+    </script>
+</body>
+</html>
