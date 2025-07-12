@@ -4787,6 +4787,7 @@ y座標を ((y座標 :: motion) + (10)) にする :: motion
         function showHome() {
             hideAllViews();
             document.getElementById('home-view').style.display = 'block';
+            window.scrollTo(0, 0);
         }
         
         function changeStep(direction) {
@@ -6673,6 +6674,9 @@ y座標を ((y座標 :: motion) + (10)) にする :: motion
             // Hide all main sections - only hide elements that actually exist
             const elements = [
                 'home-view',
+                'program-flow',
+                'coordinates',
+                'costumes-section',
                 'variables-menu', 
                 'health-system',
                 'score-system',
@@ -8064,6 +8068,9 @@ y座標を ((y座標 :: motion) + (10)) にする :: motion
             console.log('=== FORCE OVERRIDE hideAllViews called - V2.0 ===');
             const elements = [
                 'home-view',
+                'program-flow',
+                'coordinates',
+                'costumes-section',
                 'variables-menu', 
                 'health-system',
                 'score-system',
@@ -8127,6 +8134,9 @@ y座標を ((y座標 :: motion) + (10)) にする :: motion
             console.log('=== EMERGENCY OVERRIDE hideAllViews called ===');
             const elements = [
                 'home-view',
+                'program-flow',
+                'coordinates',
+                'costumes-section',
                 'variables-menu', 
                 'health-system',
                 'score-system',
