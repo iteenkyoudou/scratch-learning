@@ -1,0 +1,22 @@
+{
+  "name": "scratch-learning-site",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "npx playwright test",
+    "test:ui": "npx playwright test --ui",
+    "test:conditional": "npx playwright test conditional-test.spec.js",
+    "test:full": "npx playwright test full-navigation-test.spec.js",
+    "test:all": "npx playwright test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.54.1"
+  }
+}
