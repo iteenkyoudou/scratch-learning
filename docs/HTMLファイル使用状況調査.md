@@ -7,111 +7,88 @@
 
 ### メインファイル
 
-#### 1. **index.html** (419,132 bytes, 2025-07-12 15:08) - **メイン本番版**
-- **用途**: Scratchプログラミング学習サイト（日本語版）
-- **ステータス**: ✅ **アクティブ** - 最新かつ最大のファイル、現在の本番バージョン
-- **機能**: Motion、Looks、Controlブロックの完全なレッスンを含む教育プラットフォーム
-- **特徴**: 高度なスタイリングと機能を持つ完全版
+#### 1. **index.html** - **メイン本番版**
+- **用途**: Scratchプログラミング学習サイト（日本語SPA版）
+- **ステータス**: ✅ **アクティブ** - 現在の本番バージョン
+- **機能**: 完全なSingle Page Applicationとして実装されたScratch学習プラットフォーム
+- **特徴**: HTML/CSS/JavaScript純粋技術スタックによる教育サイト
+- **実装内容**: 
+  - プログラムの流れ（6ステップ）
+  - ループ（6ステップ）
+  - 座標システム（4ステップ）
+  - 条件分岐（if-then、if-else）
+  - 変数システム（HP、スコア）
+  - コスチューム（4ステップ）
+  - クローン機能
 
-#### 2. **scratch_simple_jp.html** (419,105 bytes, 2025-07-09 19:14) - **直近作業版**
-- **用途**: Scratchプログラミング学習サイト（シンプル日本語版）
-- **ステータス**: ✅ **アクティブ/最近** - index.htmlとほぼ同サイズで日付も近い
-- **関係**: index.htmlの直前バージョンまたはバリエーション
+## アーカイブファイル（archive/フォルダ）
 
-### Flutterシステム関連ファイル
+### 開発履歴保持ファイル
+- **clone_complete.html** - 完全なクローン機能実装版（開発履歴として保存）
+- **scratch_simple_jp.html** - 前バージョンの日本語Scratch学習サイト
+- **scratch_simple_jp_fixed.html** - 修正版（開発段階）
 
-#### 3. **web/index.html** (1,191 bytes, 2025-07-06 12:13) - **Flutter Web ビルド**
-- **用途**: Flutter Webアプリケーションのブートストラップ
-- **ステータス**: ✅ **アクティブ** - Flutter Web ビルドシステムの一部
-- **内容**: アプリ初期化を含む標準的なFlutter Web ローディングページ
+これらは現在archive/フォルダに整理され、開発履歴として保持されています。
 
-#### 4. **build/web/index.html** (1,191 bytes, 2025-07-06 12:13) - **Flutter ビルド出力**
-- **用途**: 生成されたFlutterビルド成果物
-- **ステータス**: ✅ **アクティブ** - 自動生成ビルドファイル
-- **関係**: web/index.htmlと同一（ビルド出力）
+## テストファイル（tests/フォルダ）
 
-## 開発・プロトタイプファイル
+### **機能テスト用ファイル:**
+- **test.html** - 基本ブラウザ・HTML表示テスト
+- **js_test.html** - JavaScript動作確認テスト  
+- **simple_test.html** - スプライトアニメーション機能テスト
+- **minimal_clone_test.html** - クローン機能の最小動作テスト
 
-### Scratch機能開発の変遷
+これらは開発時の機能検証用ファイルで、個別にブラウザで開いて動作確認が可能です。
 
-#### **初期プロトタイプ（7月6日）:**
-- **scratch_demo.html** (12,181 bytes) - 基本デモ版
-- **scratch_real.html** (14,092 bytes) - "リアルブロック"版
-- **scratch_blocks_v2.html** (18,163 bytes) - ブロック機能バージョン2
-- **scratch_working.html** (16,988 bytes) - 動作版チェックポイント
+## プロジェクト構造分析
 
-#### **日本語ローカライゼーション開発:**
-- **scratch_japanese.html** (18,539 bytes) - 初回日本語版
-- **scratch_japanese_blocks.html** (15,312 bytes) - 日本語ブロックバリアント
-- **scratch_fixed_jp.html** (15,145 bytes) - 修正済み日本語版
-- **scratch_overlay_jp.html** (18,392 bytes) - 日本語オーバーレイ版
+現在のプロジェクトは整理された構造になっています：
 
-#### **高度機能版:**
-- **scratch_simple_jp_fixed.html** (354,968 bytes, 7月8日) - 大型修正版
-- **scratch_clone_fixed.html** (21,436 bytes, 7月9日) - クローン機能修正版
+1. **メインアプリケーション**: `index.html` - 単一SPAファイル
+2. **アーカイブ**: `archive/` フォルダに開発履歴を保管
+3. **テスト**: `tests/` フォルダに機能テスト用ファイル
+4. **ドキュメント**: `docs/` フォルダに仕様書・調査資料
+5. **静的リソース**: `assets/` フォルダにアイコンなど
 
-#### **クローン機能開発（7月9日）:**
-- **clone_working.html** (13,245 bytes) - 動作するクローン実装
-- **clone_safe.html** (9,381 bytes) - 安全なクローン版
-- **clone_complete.html** (20,698 bytes) - 完全なクローン機能
+## 技術スタック変更の影響
 
-## テストファイル
+### **Flutter からピュアWebへの移行完了**
+- ✅ **現在**: HTML/CSS/JavaScript のみのシンプル構成
+- ✅ **メリット**: Webサーバー不要、直接ブラウザで実行可能
 
-### **基本テスト:**
-- **test.html** (299 bytes) - 基本ブラウザテストページ
-- **js_test.html** (388 bytes) - JavaScript機能テスト
-- **simple_test.html** (2,638 bytes) - シンプルアニメーションテスト
-- **minimal_clone_test.html** (6,695 bytes) - 最小クローン機能テスト
+## 現在のファイル状況
 
-## 開発パターン分析
+### **アクティブファイル（現在使用中）:**
+- ✅ `index.html` - メインアプリケーション（SPA）
 
-ファイル命名パターンから明確な開発進行が見えます：
+### **開発支援ファイル（保持推奨）:**
+- ✅ `tests/test.html` - 基本ブラウザテスト
+- ✅ `tests/js_test.html` - JavaScript動作確認
+- ✅ `tests/simple_test.html` - アニメーション機能テスト
+- ✅ `tests/minimal_clone_test.html` - クローン機能テスト
 
-1. **初期開発**: `scratch_demo` → `scratch_real` → `scratch_working`
-2. **機能反復**: `scratch_blocks_v2` でバージョニングアプローチ
-3. **ローカライゼーション**: `scratch_japanese*` シリーズで日本語実装
-4. **バグ修正**: `_fixed` サフィックスでデバッグ・修正反復
-5. **機能開発**: `clone_*` シリーズでクローン機能開発
-6. **現行版**: `scratch_simple_jp` → `index.html` への進化
+### **アーカイブファイル（履歴保持）:**
+- ✅ `archive/clone_complete.html` - クローン機能実装版
+- ✅ `archive/scratch_simple_jp.html` - 前バージョン
+- ✅ `archive/scratch_simple_jp_fixed.html` - 修正版
 
-## クリーンアップ推奨事項
-
-### **アーカイブ・削除可能（廃棄対象開発ファイル）:**
-- ❌ `scratch_demo.html`
-- ❌ `scratch_real.html`
-- ❌ `scratch_blocks_v2.html`
-- ❌ `scratch_working.html`
-- ❌ `scratch_japanese.html`
-- ❌ `scratch_japanese_blocks.html`
-- ❌ `scratch_fixed_jp.html`
-- ❌ `scratch_overlay_jp.html`
-- ❌ `scratch_clone_fixed.html`
-- ❌ `clone_working.html`
-- ❌ `clone_safe.html`
-
-### **保持検討（テスト・デバッグユーティリティ）:**
-- ⚠️ `test.html` （基本ブラウザテスト）
-- ⚠️ `js_test.html` （JavaScriptテスト）
-- ⚠️ `simple_test.html` （アニメーションテスト）
-- ⚠️ `minimal_clone_test.html` （クローンテスト）
-
-### **アクティブ保持（現行システム）:**
-- ✅ `index.html` （メインアプリケーション）
-- ✅ `scratch_simple_jp.html` （バックアップ・前バージョン）
-- ✅ `scratch_simple_jp_fixed.html` （中間バージョン）
-- ✅ `clone_complete.html` （完全なクローン実装）
-- ✅ `web/index.html` （Flutter Web）
-- ✅ `build/web/index.html` （Flutter ビルド）
+### **ドキュメント・仕様:**
+- ✅ `docs/SPA構造仕様書.md` - アプリケーション仕様
+- ✅ `docs/HTMLファイル使用状況調査.md` - このファイル
 
 ## サマリー
 
-**総計21個のHTMLファイル**のうち、メインアプリケーション用の**アクティブファイルは2-3個**（`index.html`が主力）、**Flutterフレームワーク関連が2個**、**廃棄可能な開発・プロトタイプファイルが15個以上**存在します。
+**整理完了**: プロジェクトは適切にフォルダ分けされ、メインファイル1個＋支援ファイル群という理想的な構成になっています。
 
-コードベースをクリーンアップするために、廃棄対象ファイルを安全にアーカイブまたは削除することを推奨します。
+**技術的特徴**:
+- 純粋なWebテクノロジー（フレームワーク依存なし）
+- 単一HTMLファイルSPA
+- 静的サイトとして動作
+- 開発・テスト・履歴ファイルが適切に分離
 
 ## 推奨アクション
 
-1. **即座実行可能**: 明らかに廃棄対象の開発ファイル11個を削除
-2. **慎重検討**: テストファイル4個は開発デバッグ用途で保持するか判断
-3. **現行維持**: アクティブファイル6個は現状維持
-4. **整理後の状態**: 合計6-10個のファイルに整理可能
+1. ✅ **現状維持**: ファイル構造は適切に整理済み
+2. ✅ **継続開発**: `index.html` への機能追加・修正
+3. ✅ **テスト活用**: `tests/` フォルダのファイルで個別機能検証
+4. ✅ **履歴管理**: `archive/` フォルダで開発経緯を保持
