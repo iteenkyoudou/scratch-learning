@@ -58,9 +58,12 @@
 ### 7. メッセージ・通信サブセクション
 | セクションID | 説明 | ステップ数 |
 |-------------|------|-----------|
-| `messages-send-section` | 基本的なメッセージ送信 | - |
-| `messages-send-and-wait-section` | メッセージ送信と待機 | - |
-| `sprites-conversation-section` | スプライト間会話システム | - |
+| `messages-send-section` | 基本的なメッセージ送信（学習） | - |
+| `messages-send-practice1` | 練習問題1：キャラクターに挨拶させよう | - |
+| `messages-send-practice2` | 練習問題2：ゲーム開始の合図 | - |
+| `messages-send-and-wait-section` | メッセージ送信と待機（学習） | - |
+| `messages-wait-practice1` | 練習問題3：順番に動かそう | - |
+| `messages-wait-practice2` | 練習問題4：会話のキャッチボール | - |
 
 ### 8. 背景・ステージサブセクション
 | セクションID | 説明 | ステップ数 |
@@ -141,11 +144,20 @@
 - `showMusicControl()` - 音楽制御セクション
 
 ### メッセージ機能関数
-- `showMessagesSend()` - メッセージ送信セクション
-- `showMessagesSendAndWait()` - メッセージ送信と待機セクション
-- `showSpritesConversation()` - スプライト会話セクション
+- `showMessagesSend()` - メッセージ送信セクション（学習）
+- `showMessagesSendPractice1()` - 練習問題1：キャラクターに挨拶
+- `showMessagesSendPractice2()` - 練習問題2：ゲーム開始の合図
+- `showMessagesSendAndWait()` - メッセージ送信と待機セクション（学習）
+- `showMessagesWaitPractice1()` - 練習問題3：順番に動かそう
+- `showMessagesWaitPractice2()` - 練習問題4：会話のキャッチボール
 - `showBasicMessages()` - 基本メッセージ機能
 - `showSpritesCommunication()` - スプライト通信機能
+
+### メッセージ練習問題答え表示関数
+- `showMessagesSendPractice1Answer()` - 練習問題1の答え表示
+- `showMessagesSendPractice2Answer()` - 練習問題2の答え表示
+- `showMessagesWaitPractice1Answer()` - 練習問題3の答え表示
+- `showMessagesWaitPractice2Answer()` - 練習問題4の答え表示
 
 ### 背景機能関数
 - `showBackgroundBasics()` - 背景基本操作
