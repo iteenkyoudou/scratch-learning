@@ -39,13 +39,48 @@
 | `clone-applications-section` | 高度なクローン応用 | 4ステップ |
 
 ### 5. 追加機能メニューハブ
-| セクションID | 説明 |
-|-------------|------|
-| `sounds-menu` | 音声・音楽機能 |
-| `messages-menu` | スプライト間通信システム |
-| `backgrounds-menu` | ステージ背景管理 |
-| `lists-menu` | リスト・配列データ構造 |
-| `pen-menu` | 描画・アート作成ツール |
+| セクションID | 説明 | 実装状況 |
+|-------------|------|---------|
+| `sounds-menu` | 音声・音楽機能メニューハブ | ✅実装済み |
+| `messages-menu` | スプライト間通信システムメニューハブ | ✅実装済み |
+| `backgrounds-menu` | ステージ背景管理メニューハブ | ✅実装済み |
+| `lists-menu` | リスト・配列データ構造メニューハブ | ✅実装済み |
+| `pen-menu` | 描画・アート作成ツールメニューハブ | ✅実装済み |
+
+### 6. 音声・音楽サブセクション
+| セクションID | 説明 | ステップ数 |
+|-------------|------|-----------|
+| `basic-sounds` | 基本的な音声再生 | - |
+| `music-instruments` | 楽器音・音色 | - |
+| `sound-effects` | 効果音・サウンドエフェクト | - |
+| `music-control` | 音楽制御・テンポ調整 | - |
+
+### 7. メッセージ・通信サブセクション
+| セクションID | 説明 | ステップ数 |
+|-------------|------|-----------|
+| `messages-send-section` | 基本的なメッセージ送信 | - |
+| `messages-send-and-wait-section` | メッセージ送信と待機 | - |
+| `sprites-conversation-section` | スプライト間会話システム | - |
+
+### 8. 背景・ステージサブセクション
+| セクションID | 説明 | ステップ数 |
+|-------------|------|-----------|
+| `background-basics` | 背景の基本操作 | 4ステップ |
+| `background-switching` | 背景切り替え機能 | 4ステップ |
+
+### 9. リスト・データ構造サブセクション
+| セクションID | 説明 | ステップ数 |
+|-------------|------|-----------|
+| `list-basics-and-operations` | リストの基本操作 | 4ステップ |
+| `list-usage-and-applications` | リストの活用・応用 | 4ステップ |
+
+### 10. ペン・描画サブセクション
+| セクションID | 説明 | ステップ数 |
+|-------------|------|-----------|
+| `pen-basics` | ペン機能の基本 | - |
+| `pen-colors` | 色・太さの変更 | - |
+| `shape-drawing` | 図形描画 | - |
+| `art-creation` | アート作成・応用 | - |
 
 ## ナビゲーション構造
 
@@ -72,12 +107,12 @@
 6. **コスチューム** (👗) - スプライトの見た目変更
 7. **クローン** (👥) - オブジェクト複製・管理
 
-### 拡張機能
-8. **音** (🎵) - 音声統合
-9. **メッセージ** (📢) - スプライト間通信
-10. **背景** (🎭) - ステージデザイン
-11. **リスト** (📋) - データ構造管理
-12. **ペンツール** (✏️) - 描画・グラフィックス
+### 拡張機能（実装済み）
+8. **音** (🎵) - 音声統合・楽器・効果音
+9. **メッセージ** (📢) - スプライト間通信・会話システム
+10. **背景** (🎭) - ステージデザイン・背景切り替え
+11. **リスト** (📋) - データ構造管理・配列操作
+12. **ペンツール** (✏️) - 描画・グラフィックス・アート作成
 
 ### 専門サブモジュール
 - **体力システム** - ゲーム風HP仕組み
@@ -91,6 +126,44 @@
 - `showHome()` - メインダッシュボード表示
 - `hideAllViews()` - 全セクション可視性リセット
 - `showLesson(type)` - 汎用レッスンローダー
+
+### 拡張機能ナビゲーション
+- `showSoundsMenu()` - 音声機能メニュー表示
+- `showMessagesMenu()` - メッセージ機能メニュー表示
+- `showBackgroundsMenu()` - 背景機能メニュー表示
+- `showListsMenu()` - リスト機能メニュー表示
+- `showPenMenu()` - ペン機能メニュー表示
+
+### 音声機能関数
+- `showBasicSounds()` - 基本音声再生セクション
+- `showMusicInstruments()` - 楽器音セクション
+- `showSoundEffects()` - 効果音セクション
+- `showMusicControl()` - 音楽制御セクション
+
+### メッセージ機能関数
+- `showMessagesSend()` - メッセージ送信セクション
+- `showMessagesSendAndWait()` - メッセージ送信と待機セクション
+- `showSpritesConversation()` - スプライト会話セクション
+- `showBasicMessages()` - 基本メッセージ機能
+- `showSpritesCommunication()` - スプライト通信機能
+
+### 背景機能関数
+- `showBackgroundBasics()` - 背景基本操作
+- `showBackgroundBasicsStep(step)` - 背景基本ステップナビゲーション
+- `showBackgroundSwitching()` - 背景切り替え機能
+- `showBackgroundSwitchingStep(step)` - 背景切り替えステップナビゲーション
+
+### リスト機能関数
+- `showListBasicsAndOperations()` - リスト基本操作
+- `showListBasicsAndOperationsStep(step)` - リスト基本ステップナビゲーション
+- `showListUsageAndApplications()` - リスト活用・応用
+- `showListUsageAndApplicationsStep(step)` - リスト応用ステップナビゲーション
+
+### ペン機能関数
+- `showPenBasics()` - ペン基本機能
+- `showPenColors()` - ペン色・太さ変更
+- `showShapeDrawing()` - 図形描画機能
+- `showArtCreation()` - アート作成機能
 
 ### ステップ管理
 - `changeStep(direction)` - レッスンステップ間ナビゲーション
