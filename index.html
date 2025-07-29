@@ -5085,23 +5085,21 @@ y座標を (10) ずつ変える :: motion
 
             <div class="block-container">
                 <h4>✅ 比較プログラム:</h4>
-                <div style="display: flex; gap: 30px;">
-                    <div style="flex: 1;">
-                        <h5>📤 普通に送る場合:</h5>
-                        <pre class="blocks">
+                <div style="margin-bottom: 30px;">
+                    <h5>📤 普通に送る場合:</h5>
+                    <pre class="blocks">
 @greenFlag がクリックされたとき :: events hat
 [準備して v] を送る :: events
 [すぐに実行！] と言う :: looks
-                        </pre>
-                    </div>
-                    <div style="flex: 1;">
-                        <h5>⏰ 送って待つ場合:</h5>
-                        <pre class="blocks">
+                    </pre>
+                </div>
+                <div>
+                    <h5>⏰ 送って待つ場合:</h5>
+                    <pre class="blocks">
 @greenFlag がクリックされたとき :: events hat
 [準備して v] を送って待つ :: events
 [相手が終わってから実行！] と言う :: looks
-                        </pre>
-                    </div>
+                    </pre>
                 </div>
             </div>
 
@@ -5160,25 +5158,15 @@ y座標を (10) ずつ変える :: motion
             <div class="blocks-container">
                 <div class="block-group">
                     <h4>📂 イベントブロック</h4>
-                    <div class="scratch-block events">
-                        緑の旗がクリックされたとき
-                    </div>
-                    <div class="scratch-block events">
-                        「イヌへ挨拶」を送る
-                    </div>
-                    <div class="scratch-block events">
-                        「イヌへ挨拶」を受け取ったとき
-                    </div>
+                    <pre class="blocks">@greenFlag がクリックされたとき :: events hat</pre>
+                    <pre class="blocks">[イヌへ挨拶] を送る :: events</pre>
+                    <pre class="blocks">[イヌへ挨拶] を受け取ったとき :: events hat</pre>
                 </div>
 
                 <div class="block-group">
                     <h4>👁️ 見た目ブロック</h4>
-                    <div class="scratch-block looks">
-                        「おはよう」と2秒言う
-                    </div>
-                    <div class="scratch-block looks">
-                        「おはよう！」と2秒言う
-                    </div>
+                    <pre class="blocks">[おはよう] と (2) 秒言う :: looks</pre>
+                    <pre class="blocks">[おはよう！] と (2) 秒言う :: looks</pre>
                 </div>
             </div>
 
@@ -5191,29 +5179,19 @@ y座標を (10) ずつ変える :: motion
                         <div class="blocks-container">
                             <div class="block-group">
                                 <h4>🐱 ネコのスクリプト（完成版）</h4>
-                                <div class="connected-blocks">
-                                    <div class="scratch-block events">
-                                        緑の旗がクリックされたとき
-                                    </div>
-                                    <div class="scratch-block looks">
-                                        「おはよう」と2秒言う
-                                    </div>
-                                    <div class="scratch-block events">
-                                        「イヌへ挨拶」を送る
-                                    </div>
-                                </div>
+                                <pre class="blocks">
+@greenFlag がクリックされたとき :: events hat
+[おはよう] と (2) 秒言う :: looks
+[イヌへ挨拶] を送る :: events
+                                </pre>
                             </div>
 
                             <div class="block-group">
                                 <h4>🐶 イヌのスクリプト（完成版）</h4>
-                                <div class="connected-blocks">
-                                    <div class="scratch-block events">
-                                        「イヌへ挨拶」を受け取ったとき
-                                    </div>
-                                    <div class="scratch-block looks">
-                                        「おはよう！」と2秒言う
-                                    </div>
-                                </div>
+                                <pre class="blocks">
+[イヌへ挨拶] を受け取ったとき :: events hat
+[おはよう！] と (2) 秒言う :: looks
+                                </pre>
                             </div>
                         </div><br>
                         
@@ -5274,33 +5252,16 @@ y座標を (10) ずつ変える :: motion
 
             <div class="blocks-container">
                 <div class="block-group">
-                    <h4>🐱 ネコのスクリプト（送信側）</h4>
-                    <div class="scratch-block events">
-                        スペース キーが押されたとき
-                    </div>
-                    <div class="scratch-block events">
-                        「ゲーム開始」を送る
-                    </div>
+                    <h4>📂 イベントブロック</h4>
+                    <pre class="blocks">[スペース v] キーが押されたとき :: events hat</pre>
+                    <pre class="blocks">[ゲーム開始] を送る :: events</pre>
+                    <pre class="blocks">[ゲーム開始] を受け取ったとき :: events hat</pre>
                 </div>
 
                 <div class="block-group">
-                    <h4>🐶 イヌのスクリプト（受信側）</h4>
-                    <div class="scratch-block events">
-                        「ゲーム開始」を受け取ったとき
-                    </div>
-                    <div class="scratch-block looks">
-                        「がんばるぞ！」と2秒言う
-                    </div>
-                </div>
-
-                <div class="block-group">
-                    <h4>🐦 鳥のスクリプト（受信側）</h4>
-                    <div class="scratch-block events">
-                        「ゲーム開始」を受け取ったとき
-                    </div>
-                    <div class="scratch-block looks">
-                        「よーし！」と2秒言う
-                    </div>
+                    <h4>👁️ 見た目ブロック</h4>
+                    <pre class="blocks">[がんばるぞ！] と (2) 秒言う :: looks</pre>
+                    <pre class="blocks">[よーし！] と (2) 秒言う :: looks</pre>
                 </div>
             </div>
 
@@ -5313,38 +5274,26 @@ y座標を (10) ずつ変える :: motion
                         <div class="blocks-container">
                             <div class="block-group">
                                 <h4>🐱 ネコのスクリプト（完成版）</h4>
-                                <div class="connected-blocks">
-                                    <div class="scratch-block events">
-                                        スペース キーが押されたとき
-                                    </div>
-                                    <div class="scratch-block events">
-                                        「ゲーム開始」を送る
-                                    </div>
-                                </div>
+                                <pre class="blocks">
+[スペース v] キーが押されたとき :: events hat
+[ゲーム開始] を送る :: events
+                                </pre>
                             </div>
 
                             <div class="block-group">
                                 <h4>🐶 イヌのスクリプト（完成版）</h4>
-                                <div class="connected-blocks">
-                                    <div class="scratch-block events">
-                                        「ゲーム開始」を受け取ったとき
-                                    </div>
-                                    <div class="scratch-block looks">
-                                        「がんばるぞ！」と2秒言う
-                                    </div>
-                                </div>
+                                <pre class="blocks">
+[ゲーム開始] を受け取ったとき :: events hat
+[がんばるぞ！] と (2) 秒言う :: looks
+                                </pre>
                             </div>
 
                             <div class="block-group">
                                 <h4>🐦 鳥のスクリプト（完成版）</h4>
-                                <div class="connected-blocks">
-                                    <div class="scratch-block events">
-                                        「ゲーム開始」を受け取ったとき
-                                    </div>
-                                    <div class="scratch-block looks">
-                                        「よーし！」と2秒言う
-                                    </div>
-                                </div>
+                                <pre class="blocks">
+[ゲーム開始] を受け取ったとき :: events hat
+[よーし！] と (2) 秒言う :: looks
+                                </pre>
                             </div>
                         </div><br>
                         
@@ -5394,7 +5343,39 @@ y座標を (10) ずつ変える :: motion
                 3. 鳥がメッセージを受け取ったら10歩動く
             </div>
 
+            <div class="info-box">
+                <strong>🎭 前提条件：</strong><br>
+                • 🐱 <strong>ネコ</strong>：最初に動いて次の番を知らせる役割<br>
+                • 🐶 <strong>イヌ</strong>：2番目に動いて次の番を知らせる役割<br>
+                • 🐦 <strong>鳥</strong>：最後に動く役割<br>
+                • 順番通りに動作させるため「送って待つ」を使用します
+            </div>
+
+            <h3>🧩 使用するブロック一覧</h3>
+            <p>以下のブロックを組み合わせて、順番にリレーする動作を実現してください：</p>
+
             <div class="blocks-container">
+                <div class="block-group">
+                    <h4>📂 イベントブロック</h4>
+                    <pre class="blocks">@greenFlag がクリックされたとき :: events hat</pre>
+                    <pre class="blocks">[次の番] を送って待つ :: events</pre>
+                    <pre class="blocks">[次の番2] を送る :: events</pre>
+                    <pre class="blocks">[次の番] を受け取ったとき :: events hat</pre>
+                    <pre class="blocks">[次の番2] を受け取ったとき :: events hat</pre>
+                </div>
+
+                <div class="block-group">
+                    <h4>🏃 動きブロック</h4>
+                    <pre class="blocks">(10) 歩動かす :: motion</pre>
+                </div>
+
+                <div class="block-group">
+                    <h4>👁️ 見た目ブロック</h4>
+                    <pre class="blocks">[リレー完了！] と (2) 秒言う :: looks</pre>
+                </div>
+            </div>
+
+            <div style="display: none;" class="blocks-container">
                 <div class="block-group">
                     <h4>🐱 ネコのスクリプト（1番目）</h4>
                     <div class="scratch-block events">
@@ -5439,19 +5420,52 @@ y座標を (10) ずつ変える :: motion
                 <button class="btn answer-btn" onclick="showMessagesWaitPractice1Answer()" id="messagesWaitPractice1AnswerBtn">💡 答えを表示</button>
                 <div class="answer-section" id="messages-wait-practice1-answer" style="display: none;">
                     <div class="tip-content">
-                        <strong>✅ 解答のポイント：</strong><br><br>
+                        <strong>✅ 正解：</strong><br><br>
+                        
+                        <div class="blocks-container">
+                            <div class="block-group">
+                                <h4>🐱 ネコのスクリプト（完成版）</h4>
+                                <pre class="blocks">
+@greenFlag がクリックされたとき :: events hat
+(10) 歩動かす :: motion
+[次の番] を送って待つ :: events
+[リレー完了！] と (2) 秒言う :: looks
+                                </pre>
+                            </div>
+
+                            <div class="block-group">
+                                <h4>🐶 イヌのスクリプト（完成版）</h4>
+                                <pre class="blocks">
+[次の番] を受け取ったとき :: events hat
+(10) 歩動かす :: motion
+[次の番2] を送る :: events
+                                </pre>
+                            </div>
+
+                            <div class="block-group">
+                                <h4>🐦 鳥のスクリプト（完成版）</h4>
+                                <pre class="blocks">
+[次の番2] を受け取ったとき :: events hat
+(10) 歩動かす :: motion
+                                </pre>
+                            </div>
+                        </div><br>
                         
                         <strong>📝 実装手順：</strong><br>
-                        1. ネコに「🏁 がクリックされたとき」ブロックを配置<br>
-                        2. 「10歩動かす」ブロックを追加<br>
-                        3. 「次の番」を送って待つブロックを追加<br>
-                        4. イヌに「次の番」を受け取ったときブロックを配置<br>
-                        5. 各スプライトに動きと次のメッセージ送信を設定<br><br>
+                        1. <strong>ネコ</strong>に「緑の旗がクリックされたとき」ブロックを配置<br>
+                        2. その下に「10歩動かす」ブロックを追加<br>
+                        3. その下に「次の番」を送って待つブロックを追加<br>
+                        4. <strong>イヌ</strong>に「次の番」を受け取ったときブロックを配置<br>
+                        5. その下に「10歩動かす」と「次の番2」を送るブロックを追加<br>
+                        6. <strong>鳥</strong>に「次の番2」を受け取ったときブロックと「10歩動かす」を追加<br><br>
                         
-                        <strong>🎯 「送って待つ」の効果：</strong><br>
-                        • ネコが動き終わるまでイヌは待機<br>
-                        • イヌが動き終わるまで鳥は待機<br>
-                        • 順番が保証された美しいリレー動作が実現！
+                        <strong>🔍 解説：</strong><br>
+                        <strong>「送って待つ」によるリレー制御</strong>の完璧な例です。<br>
+                        • <strong>順次実行</strong>：各スプライトが順番通りに動作<br>
+                        • <strong>同期待機</strong>：前のスプライトの完了を待ってから次が開始<br>
+                        • <strong>メッセージチェーン</strong>：次の番→次の番2と連続したメッセージ送信<br>
+                        • <strong>リレー効果</strong>：バトンが順番に渡される自然な動作<br>
+                        • <strong>完了通知</strong>：最後にネコが「リレー完了！」で締めくくり
                     </div>
                 </div>
             </div>
@@ -5479,7 +5493,39 @@ y座標を (10) ずつ変える :: motion
                 4. ネコ：「ありがとう！」→ 会話終了
             </div>
 
+            <div class="info-box">
+                <strong>🎭 前提条件：</strong><br>
+                • 🐱 <strong>ネコ</strong>：会話を始めて最後にお礼を言う役割<br>
+                • 🐶 <strong>イヌ</strong>：ネコの質問に答えて次に繋げる役割<br>
+                • 🐦 <strong>鳥</strong>：会話に参加してネコにメッセージを送る役割<br>
+                • 自然な会話の流れを作るため「送って待つ」を使用します
+            </div>
+
+            <h3>🧩 使用するブロック一覧</h3>
+            <p>以下のブロックを組み合わせて、自然な会話のキャッチボールを実現してください：</p>
+
             <div class="blocks-container">
+                <div class="block-group">
+                    <h4>📂 イベントブロック</h4>
+                    <pre class="blocks">@greenFlag がクリックされたとき :: events hat</pre>
+                    <pre class="blocks">[イヌの返事] を送って待つ :: events</pre>
+                    <pre class="blocks">[鳥の返事] を送って待つ :: events</pre>
+                    <pre class="blocks">[お礼] を送る :: events</pre>
+                    <pre class="blocks">[イヌの返事] を受け取ったとき :: events hat</pre>
+                    <pre class="blocks">[鳥の返事] を受け取ったとき :: events hat</pre>
+                    <pre class="blocks">[お礼] を受け取ったとき :: events hat</pre>
+                </div>
+
+                <div class="block-group">
+                    <h4>👁️ 見た目ブロック</h4>
+                    <pre class="blocks">[元気ですか？] と (2) 秒言う :: looks</pre>
+                    <pre class="blocks">[元気です！] と (2) 秒言う :: looks</pre>
+                    <pre class="blocks">[私も元気です] と (2) 秒言う :: looks</pre>
+                    <pre class="blocks">[ありがとう！] と (2) 秒言う :: looks</pre>
+                </div>
+            </div>
+
+            <div style="display: none;" class="blocks-container">
                 <div class="block-group">
                     <h4>🐱 ネコのスクリプト</h4>
                     <div class="scratch-block events">
@@ -5527,19 +5573,55 @@ y座標を (10) ずつ変える :: motion
                 <button class="btn answer-btn" onclick="showMessagesWaitPractice2Answer()" id="messagesWaitPractice2AnswerBtn">💡 答えを表示</button>
                 <div class="answer-section" id="messages-wait-practice2-answer" style="display: none;">
                     <div class="tip-content">
-                        <strong>✅ 解答のポイント：</strong><br><br>
+                        <strong>✅ 正解：</strong><br><br>
                         
-                        <strong>📝 会話の流れ：</strong><br>
-                        1. ネコが質問 → 「イヌの返事」を送って待つ<br>
-                        2. イヌが回答 → 「鳥の返事」を送って待つ<br>
-                        3. 鳥が回答 → 「お礼」を送る<br>
-                        4. ネコがお礼 → 会話完了<br><br>
+                        <div class="blocks-container">
+                            <div class="block-group">
+                                <h4>🐱 ネコのスクリプト（完成版）</h4>
+                                <pre class="blocks">
+@greenFlag がクリックされたとき :: events hat
+[元気ですか？] と (2) 秒言う :: looks
+[イヌの返事] を送って待つ :: events
+[ありがとう！] と (2) 秒言う :: looks
+                                </pre>
+                                <pre class="blocks">
+[お礼] を受け取ったとき :: events hat
+[ありがとう！] と (2) 秒言う :: looks
+                                </pre>
+                            </div>
+
+                            <div class="block-group">
+                                <h4>🐶 イヌのスクリプト（完成版）</h4>
+                                <pre class="blocks">
+[イヌの返事] を受け取ったとき :: events hat
+[元気です！] と (2) 秒言う :: looks
+[鳥の返事] を送って待つ :: events
+                                </pre>
+                            </div>
+
+                            <div class="block-group">
+                                <h4>🐦 鳥のスクリプト（完成版）</h4>
+                                <pre class="blocks">
+[鳥の返事] を受け取ったとき :: events hat
+[私も元気です] と (2) 秒言う :: looks
+[お礼] を送る :: events
+                                </pre>
+                            </div>
+                        </div><br>
                         
-                        <strong>🎭 自然な会話のコツ：</strong><br>
-                        • 「送って待つ」で話者が交代するまで待機<br>
-                        • 前の人が話し終わってから次の人が話す<br>
-                        • メッセージ名で会話の流れを管理<br>
-                        • 自然なリズムの会話劇が完成！
+                        <strong>📝 実装手順：</strong><br>
+                        1. <strong>ネコ</strong>に緑の旗のスクリプトと「お礼」受信スクリプトを作成<br>
+                        2. <strong>イヌ</strong>に「イヌの返事」を受け取って応答するスクリプトを作成<br>
+                        3. <strong>鳥</strong>に「鳥の返事」を受け取って応答するスクリプトを作成<br>
+                        4. 各スプライトで「送って待つ」を使って順番を制御<br><br>
+                        
+                        <strong>🔍 解説：</strong><br>
+                        <strong>会話のキャッチボール</strong>を完璧に表現した例です。<br>
+                        • <strong>順序制御</strong>：「送って待つ」で話者交代を確実に管理<br>
+                        • <strong>自然な流れ</strong>：前の人が話し終わってから次の人が話す<br>
+                        • <strong>メッセージチェーン</strong>：イヌの返事→鳥の返事→お礼の連鎖<br>
+                        • <strong>会話劇</strong>：まるで本物の会話のような自然なリズム<br>
+                        • <strong>完了処理</strong>：ネコが最後に「ありがとう！」で会話を締めくくり
                     </div>
                 </div>
             </div>
