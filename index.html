@@ -5147,24 +5147,34 @@ y座標を (10) ずつ変える :: motion
                 3. イヌがメッセージを受け取ったら「おはよう！」と返事する
             </div>
 
+            <div class="info-box">
+                <strong>🎭 前提条件：</strong><br>
+                • 🐱 <strong>ネコ</strong>：メッセージを送る役割<br>
+                • 🐶 <strong>イヌ</strong>：メッセージを受け取る役割<br>
+                • この2つのキャラクターを使って練習します
+            </div>
+
+            <h3>🧩 使用するブロック一覧</h3>
+            <p>以下のブロックを組み合わせて、上記の動作を実現してください：</p>
+            
             <div class="blocks-container">
                 <div class="block-group">
-                    <h4>🐱 ネコのスクリプト</h4>
+                    <h4>📂 イベントブロック</h4>
                     <div class="scratch-block events">
-                        🏁 がクリックされたとき
-                    </div>
-                    <div class="scratch-block looks">
-                        「おはよう」と2秒言う
+                        緑の旗がクリックされたとき
                     </div>
                     <div class="scratch-block events">
                         「イヌへ挨拶」を送る
                     </div>
+                    <div class="scratch-block events">
+                        「イヌへ挨拶」を受け取ったとき
+                    </div>
                 </div>
 
                 <div class="block-group">
-                    <h4>🐶 イヌのスクリプト</h4>
-                    <div class="scratch-block events">
-                        「イヌへ挨拶」を受け取ったとき
+                    <h4>👁️ 見た目ブロック</h4>
+                    <div class="scratch-block looks">
+                        「おはよう」と2秒言う
                     </div>
                     <div class="scratch-block looks">
                         「おはよう！」と2秒言う
@@ -5176,19 +5186,55 @@ y座標を (10) ずつ変える :: motion
                 <button class="btn answer-btn" onclick="showMessagesSendPractice1Answer()" id="messagesSendPractice1AnswerBtn">💡 答えを表示</button>
                 <div class="answer-section" id="messages-send-practice1-answer" style="display: none;">
                     <div class="tip-content">
-                        <strong>✅ 解答のポイント：</strong><br><br>
+                        <strong>✅ 正解：</strong><br><br>
+                        
+                        <div class="blocks-container">
+                            <div class="block-group">
+                                <h4>🐱 ネコのスクリプト（完成版）</h4>
+                                <div class="connected-blocks">
+                                    <div class="scratch-block events">
+                                        緑の旗がクリックされたとき
+                                    </div>
+                                    <div class="scratch-block looks">
+                                        「おはよう」と2秒言う
+                                    </div>
+                                    <div class="scratch-block events">
+                                        「イヌへ挨拶」を送る
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block-group">
+                                <h4>🐶 イヌのスクリプト（完成版）</h4>
+                                <div class="connected-blocks">
+                                    <div class="scratch-block events">
+                                        「イヌへ挨拶」を受け取ったとき
+                                    </div>
+                                    <div class="scratch-block looks">
+                                        「おはよう！」と2秒言う
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
                         
                         <strong>📝 実装手順：</strong><br>
-                        1. ネコに「🏁 がクリックされたとき」ブロックを配置<br>
-                        2. 「おはよう」と2秒言うブロックを追加<br>
-                        3. 「イヌへ挨拶」を送るブロックを追加<br>
-                        4. イヌに「イヌへ挨拶」を受け取ったときブロックを配置<br>
-                        5. 「おはよう！」と2秒言うブロックを追加<br><br>
+                        1. <strong>ネコ</strong>に「緑の旗がクリックされたとき」ブロックを配置<br>
+                        2. その下に「おはよう」と2秒言うブロックを追加<br>
+                        3. さらにその下に「イヌへ挨拶」を送るブロックを追加<br>
+                        4. <strong>イヌ</strong>に「イヌへ挨拶」を受け取ったときブロックを配置<br>
+                        5. その下に「おはよう！」と2秒言うブロックを追加<br><br>
                         
                         <strong>🎉 実行結果：</strong><br>
                         • 緑の旗をクリックするとネコが「おはよう」と言う<br>
                         • 同時にイヌが「おはよう！」と返事する<br>
-                        • スプライト間でのコミュニケーションが成功！
+                        • スプライト間でのコミュニケーションが成功！<br><br>
+                        
+                        <strong>🔍 解説：</strong><br>
+                        <strong>メッセージシステム</strong>は、異なるスプライト同士が連携するためのScratchの重要な機能です。<br>
+                        • <strong>送信側（ネコ）</strong>：「〜を送る」ブロックでメッセージを発信<br>
+                        • <strong>受信側（イヌ）</strong>：「〜を受け取ったとき」ブロックでメッセージに反応<br>
+                        • <strong>タイミング</strong>：メッセージは瞬時に全てのスプライトに届く<br>
+                        • <strong>連携効果</strong>：複数のスプライトが同期して動作できる
                     </div>
                 </div>
             </div>
@@ -5214,6 +5260,17 @@ y座標を (10) ずつ変える :: motion
                 2. イヌがメッセージを受け取ったら「がんばるぞ！」と言う<br>
                 3. 鳥がメッセージを受け取ったら「よーし！」と言う
             </div>
+
+            <div class="info-box">
+                <strong>🎭 前提条件：</strong><br>
+                • 🐱 <strong>ネコ</strong>：メッセージを送る役割（コントローラー）<br>
+                • 🐶 <strong>イヌ</strong>：メッセージを受け取る役割（プレイヤー1）<br>
+                • 🐦 <strong>鳥</strong>：メッセージを受け取る役割（プレイヤー2）<br>
+                • この3つのキャラクターを使って練習します
+            </div>
+
+            <h3>🧩 使用するブロック一覧</h3>
+            <p>以下のブロックを組み合わせて、上記の動作を実現してください：</p>
 
             <div class="blocks-container">
                 <div class="block-group">
@@ -5251,20 +5308,66 @@ y座標を (10) ずつ変える :: motion
                 <button class="btn answer-btn" onclick="showMessagesSendPractice2Answer()" id="messagesSendPractice2AnswerBtn">💡 答えを表示</button>
                 <div class="answer-section" id="messages-send-practice2-answer" style="display: none;">
                     <div class="tip-content">
-                        <strong>✅ 解答のポイント：</strong><br><br>
+                        <strong>✅ 正解：</strong><br><br>
+                        
+                        <div class="blocks-container">
+                            <div class="block-group">
+                                <h4>🐱 ネコのスクリプト（完成版）</h4>
+                                <div class="connected-blocks">
+                                    <div class="scratch-block events">
+                                        スペース キーが押されたとき
+                                    </div>
+                                    <div class="scratch-block events">
+                                        「ゲーム開始」を送る
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block-group">
+                                <h4>🐶 イヌのスクリプト（完成版）</h4>
+                                <div class="connected-blocks">
+                                    <div class="scratch-block events">
+                                        「ゲーム開始」を受け取ったとき
+                                    </div>
+                                    <div class="scratch-block looks">
+                                        「がんばるぞ！」と2秒言う
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="block-group">
+                                <h4>🐦 鳥のスクリプト（完成版）</h4>
+                                <div class="connected-blocks">
+                                    <div class="scratch-block events">
+                                        「ゲーム開始」を受け取ったとき
+                                    </div>
+                                    <div class="scratch-block looks">
+                                        「よーし！」と2秒言う
+                                    </div>
+                                </div>
+                            </div>
+                        </div><br>
                         
                         <strong>📝 実装手順：</strong><br>
-                        1. ネコに「スペース キーが押されたとき」ブロックを配置<br>
-                        2. 「ゲーム開始」を送るブロックを追加<br>
-                        3. イヌに「ゲーム開始」を受け取ったときブロックを配置<br>
-                        4. 「がんばるぞ！」と2秒言うブロックを追加<br>
-                        5. 鳥に「ゲーム開始」を受け取ったときブロックを配置<br>
-                        6. 「よーし！」と2秒言うブロックを追加<br><br>
+                        1. <strong>ネコ</strong>に「スペース キーが押されたとき」ブロックを配置<br>
+                        2. その下に「ゲーム開始」を送るブロックを追加<br>
+                        3. <strong>イヌ</strong>に「ゲーム開始」を受け取ったときブロックを配置<br>
+                        4. その下に「がんばるぞ！」と2秒言うブロックを追加<br>
+                        5. <strong>鳥</strong>に「ゲーム開始」を受け取ったときブロックを配置<br>
+                        6. その下に「よーし！」と2秒言うブロックを追加<br><br>
                         
                         <strong>🎉 実行結果：</strong><br>
                         • スペースキーを押すとすべてのスプライトが反応<br>
                         • 1つのメッセージで複数のスプライトをコントロール<br>
-                        • ゲーム開始の演出が完成！
+                        • ゲーム開始の演出が完成！<br><br>
+                        
+                        <strong>🔍 解説：</strong><br>
+                        <strong>ブロードキャスト（一斉送信）</strong>の強力な機能を活用した例です。<br>
+                        • <strong>1対多通信</strong>：1つのメッセージで複数のスプライトが同時に反応<br>
+                        • <strong>イベント駆動</strong>：スペースキー入力がトリガーとなって全体が動作<br>
+                        • <strong>同期実行</strong>：受信側スプライトは同じタイミングで処理を開始<br>
+                        • <strong>ゲーム設計</strong>：開始合図やステージ切り替えなどで頻繁に使用される<br>
+                        • <strong>拡張性</strong>：新しいスプライトを追加しても同じメッセージで連携可能
                     </div>
                 </div>
             </div>
