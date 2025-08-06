@@ -175,33 +175,136 @@
             min-width: 1500px; /* 最低幅を1500pxに大幅増加してテスト */
         }
 
-        /* Scratchブロック（preタグ）のレスポンシブ対応 */
+        /* カスタムScratchブロック描画システム */
+        .scratch-block {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 12px;
+            margin: 2px;
+            border-radius: 6px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: white;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.2);
+            border: 1px solid rgba(0,0,0,0.1);
+            position: relative;
+            min-height: 24px;
+            line-height: 1.2;
+        }
+
+        /* ブロックカテゴリ別の色設定 */
+        .scratch-block.motion { background: linear-gradient(135deg, #4C97FF 0%, #3D7ECC 100%); }
+        .scratch-block.looks { background: linear-gradient(135deg, #9966FF 0%, #7A4DCC 100%); }
+        .scratch-block.sound { background: linear-gradient(135deg, #CF63CF 0%, #B84CB8 100%); }
+        .scratch-block.events { background: linear-gradient(135deg, #FFD500 0%, #CCA000 100%); color: #333; text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
+        .scratch-block.control { background: linear-gradient(135deg, #FFAB19 0%, #CC8800 100%); color: #333; text-shadow: 0 1px 2px rgba(255,255,255,0.5); }
+        .scratch-block.sensing { background: linear-gradient(135deg, #5CB1D6 0%, #4A90AA 100%); }
+        .scratch-block.operators { background: linear-gradient(135deg, #59C059 0%, #47A047 100%); }
+        .scratch-block.variables { background: linear-gradient(135deg, #FF8C1A 0%, #CC6600 100%); }
+        .scratch-block.custom { background: linear-gradient(135deg, #FF6680 0%, #CC4D66 100%); }
+        .scratch-block.pen { background: linear-gradient(135deg, #0FBD8C 0%, #0C996F 100%); }
+
+        /* 帽子型ブロック（イベント）*/
+        .scratch-block.hat {
+            border-radius: 15px 15px 8px 8px;
+            position: relative;
+        }
+        .scratch-block.hat::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 20px;
+            width: 30px;
+            height: 8px;
+            background: inherit;
+            border-radius: 50%;
+        }
+
+        /* C字型ブロック（制御構造）*/
+        .scratch-block.c-shape {
+            display: block;
+            border-radius: 8px;
+            padding: 8px 12px;
+            margin-bottom: 4px;
+        }
+        .scratch-block.c-inner {
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            padding: 8px;
+            margin: 4px 0;
+            border-left: 3px solid rgba(255,255,255,0.3);
+            min-height: 20px;
+        }
+
+        /* 入力フィールド */
+        .scratch-input {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            border-radius: 12px;
+            padding: 2px 8px;
+            margin: 0 2px;
+            font-weight: bold;
+            display: inline-block;
+            min-width: 20px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.1);
+            text-shadow: none;
+        }
+
+        /* ブールド値（六角形）*/
+        .scratch-boolean {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+            padding: 2px 12px;
+            margin: 0 2px;
+            clip-path: polygon(15% 0%, 85% 0%, 100% 50%, 85% 100%, 15% 100%, 0% 50%);
+            font-weight: bold;
+            text-shadow: none;
+        }
+
+        /* ブロック接続部分 */
+        .scratch-block::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+        }
+
+        .scratch-block::after {
+            content: '';
+            position: absolute;
+            right: -2px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 2px;
+        }
+
+        /* ブロック積み重ね表示 */
+        .scratch-stack {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+
+        /* 従来のpre.blocksは非表示 */
         pre.blocks {
-            white-space: pre; /* テキストを折り返さず、元の形式を保持 */
-            word-wrap: normal; /* 単語の改行を防ぐ */
-            overflow-x: auto; /* 横スクロール対応 */
-            font-size: 14px; /* モバイルでの可読性向上 */
-            line-height: 1.4;
-            padding: 15px;
-            margin: 0;
-            background: transparent;
-            border: none;
-            min-width: fit-content; /* 内容に応じて最小幅を設定 */
-        }
-
-        /* scratchblocksライブラリ生成要素のレスポンシブ対応 */
-        .scratchblocks svg {
-            max-width: none !important; /* SVGの最大幅制限を解除 */
-            width: auto !important; /* 自動幅調整 */
-            height: auto !important; /* 自動高さ調整 */
-        }
-
-        /* scratchblocksコンテナの調整 */
-        .scratchblocks {
-            overflow-x: auto; /* 横スクロール対応 */
-            max-width: 100%; /* 親要素の幅を超えないように */
-            display: block; /* ブロック表示 */
-            min-width: 1400px; /* scratchblocksの最低幅を1400pxに大幅増加 */
+            display: none;
         }
 
         /* レスポンシブデザイン: モバイル対応 */
@@ -1040,27 +1143,27 @@
                 
                 <div class="blocks-grid">
                     <div class="block-item">
-                        <pre class="blocks">@greenFlag がクリックされたとき :: events hat</pre>
+                        <div class="scratch-block events hat">🏁 緑の旗がクリックされたとき</div>
                         <div class="japanese-label">プログラムのはじまり（みどりのはたブロック）<br><strong>📊 必要な個数: 1個</strong></div>
                     </div>
                     <div class="block-item">
-                        <pre class="blocks">[こんにちは！] という :: looks</pre>
+                        <div class="scratch-block looks"><span class="scratch-input">こんにちは！</span> と言う</div>
                         <div class="japanese-label"><strong>🟣 最初のあいさつ（見た目ブロック）</strong><br><strong>📊 必要な個数: 1個</strong></div>
                     </div>
                     <div class="block-item">
-                        <pre class="blocks">(1) びょうまつ :: control</pre>
+                        <div class="scratch-block control"><span class="scratch-input">1</span> 秒待つ</div>
                         <div class="japanese-label">うごきのあいだをつくる（せいぎょブロック）<br><strong>📊 必要な個数: 3個</strong></div>
                     </div>
                     <div class="block-item">
-                        <pre class="blocks">(50) ほうごかす :: motion</pre>
+                        <div class="scratch-block motion"><span class="scratch-input">50</span> 歩動かす</div>
                         <div class="japanese-label">みぎにうごく（うごきブロック）<br><strong>📊 必要な個数: 1個</strong></div>
                     </div>
                     <div class="block-item">
-                        <pre class="blocks">みぎに (90) どまわす :: motion</pre>
+                        <div class="scratch-block motion">右に <span class="scratch-input">90</span> 度回す</div>
                         <div class="japanese-label">90どまわる（うごきブロック）<br><strong>📊 必要な個数: 1個</strong></div>
                     </div>
                     <div class="block-item">
-                        <pre class="blocks">[さようなら！] という :: looks</pre>
+                        <div class="scratch-block looks"><span class="scratch-input">さようなら！</span> と言う</div>
                         <div class="japanese-label"><strong>🟣 最後のおわかれ（見た目ブロック）</strong><br><strong>📊 必要な個数: 1個</strong></div>
                     </div>
                 </div>
@@ -1077,16 +1180,16 @@
                 
                 <div class="block-container">
                     <h4>🎯 くみたてかた:</h4>
-                    <pre class="blocks">
-@greenFlag がクリックされたとき :: events hat
-[こんにちは！] という :: looks
-(1) びょうまつ :: control
-(50) ほうごかす :: motion
-(1) びょうまつ :: control
-みぎに (90) どまわす :: motion
-(1) びょうまつ :: control
-[さようなら！] という :: looks
-                    </pre>
+                    <div class="scratch-stack">
+                        <div class="scratch-block events hat">🏁 緑の旗がクリックされたとき</div>
+                        <div class="scratch-block looks"><span class="scratch-input">こんにちは！</span> と言う</div>
+                        <div class="scratch-block control"><span class="scratch-input">1</span> 秒待つ</div>
+                        <div class="scratch-block motion"><span class="scratch-input">50</span> 歩動かす</div>
+                        <div class="scratch-block control"><span class="scratch-input">1</span> 秒待つ</div>
+                        <div class="scratch-block motion">右に <span class="scratch-input">90</span> 度回す</div>
+                        <div class="scratch-block control"><span class="scratch-input">1</span> 秒待つ</div>
+                        <div class="scratch-block looks"><span class="scratch-input">さようなら！</span> と言う</div>
+                    </div>
                 </div>
 
                 <div class="info-box success">
@@ -1126,56 +1229,56 @@
                             <div class="execution-item">
                                 <div class="step-number">1</div>
                                 <div class="execution-content">
-                                    <pre class="blocks">@greenFlag がクリックされたとき :: events hat</pre>
+                                    <div class="scratch-block events hat">🏁 緑の旗がクリックされたとき</div>
                                     <div class="execution-description">プログラムのスタートちてん</div>
                                 </div>
                             </div>
                             <div class="execution-item">
                                 <div class="step-number">2</div>
                                 <div class="execution-content">
-                                    <pre class="blocks">[こんにちは！] という :: looks</pre>
+                                    <div class="scratch-block looks"><span class="scratch-input">こんにちは！</span> と言う</div>
                                     <div class="execution-description">最初のアクション：あいさつ</div>
                                 </div>
                             </div>
                             <div class="execution-item">
                                 <div class="step-number">3</div>
                                 <div class="execution-content">
-                                    <pre class="blocks">(1) びょうまつ :: control</pre>
+                                    <div class="scratch-block control"><span class="scratch-input">1</span> 秒待つ</div>
                                     <div class="execution-description">あいだをあけてみやすくする</div>
                                 </div>
                             </div>
                             <div class="execution-item">
                                 <div class="step-number">4</div>
                                 <div class="execution-content">
-                                    <pre class="blocks">(50) ほうごかす :: motion</pre>
+                                    <div class="scratch-block motion"><span class="scratch-input">50</span> 歩動かす</div>
                                     <div class="execution-description">つぎのアクション：いどう</div>
                                 </div>
                             </div>
                             <div class="execution-item">
                                 <div class="step-number">5</div>
                                 <div class="execution-content">
-                                    <pre class="blocks">(1) びょうまつ :: control</pre>
+                                    <div class="scratch-block control"><span class="scratch-input">1</span> 秒待つ</div>
                                     <div class="execution-description">またあいだをあける</div>
                                 </div>
                             </div>
                             <div class="execution-item">
                                 <div class="step-number">6</div>
                                 <div class="execution-content">
-                                    <pre class="blocks">みぎに (90) どまわす :: motion</pre>
+                                    <div class="scratch-block motion">右に <span class="scratch-input">90</span> 度回す</div>
                                     <div class="execution-description">つぎのアクション：かいてん</div>
                                 </div>
                             </div>
                             <div class="execution-item">
                                 <div class="step-number">7</div>
                                 <div class="execution-content">
-                                    <pre class="blocks">(1) びょうまつ :: control</pre>
+                                    <div class="scratch-block control"><span class="scratch-input">1</span> 秒待つ</div>
                                     <div class="execution-description">最後の間</div>
                                 </div>
                             </div>
                             <div class="execution-item">
                                 <div class="step-number">8</div>
                                 <div class="execution-content">
-                                    <pre class="blocks">[さようなら！] という :: looks</pre>
+                                    <div class="scratch-block looks"><span class="scratch-input">さようなら！</span> と言う</div>
                                     <div class="execution-description">最後のアクション：おわかれ</div>
                                 </div>
                             </div>
@@ -5784,7 +5887,7 @@ y座標を (10) ずつ変える :: motion
             <div class="code-example">
                 <h4>🧩 データを追加するブロック</h4>
                 <div class="block-example">
-                    <div class="scratch-block variables">(赤) を [好きな色] に追加する</div>
+                    <pre class="blocks">[赤] を [好きな色 v] に追加する :: list</pre>
                     <div class="explanation">
                         <strong>使い方：</strong><br>
                         1. 「変数」カテゴリから選ぶ<br>
@@ -5795,7 +5898,7 @@ y座標を (10) ずつ変える :: motion
                 </div>
 
                 <div class="block-example">
-                    <div class="scratch-block variables">(青) を [好きな色] の (1) 番目に挿入する</div>
+                    <pre class="blocks">[青] を [好きな色 v] の (1) 番目に挿入する :: list</pre>
                     <div class="explanation">
                         <strong>特定の位置に追加：</strong><br>
                         • 1番目に追加すると、一番上に入る<br>
@@ -5831,7 +5934,7 @@ y座標を (10) ずつ変える :: motion
             <div class="code-example">
                 <h4>🧩 データを削除するブロック</h4>
                 <div class="block-example">
-                    <div class="scratch-block variables">[好きな色] の (1) 番目を削除する</div>
+                    <pre class="blocks">[好きな色 v] の (1) 番目を削除する :: list</pre>
                     <div class="explanation">
                         <strong>番号で削除：</strong><br>
                         • 1番目＝一番上のデータを削除<br>
@@ -5841,7 +5944,7 @@ y座標を (10) ずつ変える :: motion
                 </div>
 
                 <div class="block-example">
-                    <div class="scratch-block variables">[好きな色] のすべてを削除する</div>
+                    <pre class="blocks">[好きな色 v] のすべてを削除する :: list</pre>
                     <div class="explanation">
                         <strong>全削除：</strong><br>
                         リストの中身を全部空っぽにします
@@ -5876,7 +5979,7 @@ y座標を (10) ずつ変える :: motion
             <div class="code-example">
                 <h4>🧩 表示設定のブロック</h4>
                 <div class="block-example">
-                    <div class="scratch-block variables">リスト [好きな色] を表示する</div>
+                    <pre class="blocks">リスト [好きな色 v] を表示する :: list</pre>
                     <div class="explanation">
                         <strong>リストを表示：</strong><br>
                         ステージにリストを表示します
@@ -5884,7 +5987,7 @@ y座標を (10) ずつ変える :: motion
                 </div>
 
                 <div class="block-example">
-                    <div class="scratch-block variables">リスト [好きな色] を隠す</div>
+                    <pre class="blocks">リスト [好きな色 v] を隠す :: list</pre>
                     <div class="explanation">
                         <strong>リストを隠す：</strong><br>
                         ステージからリストを隠します<br>
@@ -5923,22 +6026,24 @@ y座標を (10) ずつ変える :: motion
                         <strong>ステップ1：</strong> 「買い物リスト」という名前のリストを作る
                     </div>
                     <div class="challenge-step">
-                        <strong>ステップ2：</strong> 以下の商品を追加する
-                        <ul>
-                            <li>牛乳</li>
-                            <li>パン</li>
-                            <li>たまご</li>
-                            <li>りんご</li>
-                        </ul>
+                        <strong>ステップ2：</strong> 以下のブロックで商品を追加する
+                        <pre class="blocks">[牛乳] を [買い物リスト v] に追加する :: list</pre>
+                        <pre class="blocks">[パン] を [買い物リスト v] に追加する :: list</pre>
+                        <pre class="blocks">[たまご] を [買い物リスト v] に追加する :: list</pre>
+                        <pre class="blocks">[りんご] を [買い物リスト v] に追加する :: list</pre>
                     </div>
                     <div class="challenge-step">
                         <strong>ステップ3：</strong> 「パン」を削除する（買い終わったから）
+                        <pre class="blocks">[買い物リスト v] の (2) 番目を削除する :: list</pre>
                     </div>
                     <div class="challenge-step">
                         <strong>ステップ4：</strong> 「バナナ」を追加する
+                        <pre class="blocks">[バナナ] を [買い物リスト v] に追加する :: list</pre>
                     </div>
                     <div class="challenge-step">
                         <strong>ステップ5：</strong> リストを一度隠して、また表示する
+                        <pre class="blocks">リスト [買い物リスト v] を隠す :: list</pre>
+                        <pre class="blocks">リスト [買い物リスト v] を表示する :: list</pre>
                     </div>
                 </div>
             </div>
@@ -5990,7 +6095,7 @@ y座標を (10) ずつ変える :: motion
             <div class="code-example">
                 <h4>🧩 データを取り出すブロック</h4>
                 <div class="block-example">
-                    <div class="scratch-block variables">[好きな色] の (1) 番目</div>
+                    <pre class="blocks">[好きな色 v] の (1) 番目 :: list</pre>
                     <div class="explanation">
                         <strong>番号で取り出し：</strong><br>
                         • 1番目＝リストの一番上<br>
@@ -6000,7 +6105,7 @@ y座標を (10) ずつ変える :: motion
                 </div>
 
                 <div class="block-example">
-                    <div class="scratch-block variables">[好きな色] の (ランダム) 番目</div>
+                    <pre class="blocks">[好きな色 v] の (ランダム) 番目 :: list</pre>
                     <div class="explanation">
                         <strong>ランダムで取り出し：</strong><br>
                         リストからランダムに1つ選んで取り出します<br>
@@ -6012,10 +6117,12 @@ y座標を (10) ずつ変える :: motion
             <div class="practical-example">
                 <h4>🎮 実用例：ランダム挨拶</h4>
                 <div class="block-sequence">
-                    <div class="scratch-block variables">(こんにちは) を [挨拶リスト] に追加する</div>
-                    <div class="scratch-block variables">(おはよう) を [挨拶リスト] に追加する</div>
-                    <div class="scratch-block variables">(こんばんは) を [挨拶リスト] に追加する</div>
-                    <div class="scratch-block looks">[挨拶リスト] の (ランダム) 番目 と言う</div>
+                    <pre class="blocks">
+(こんにちは) を [挨拶リスト v] に追加する :: list
+(おはよう) を [挨拶リスト v] に追加する :: list
+(こんばんは) を [挨拶リスト v] に追加する :: list
+([挨拶リスト v] の (ランダム) 番目) と言う :: looks
+                    </pre>
                 </div>
                 <p>毎回違う挨拶をしてくれるキャラクターができます！</p>
             </div>
@@ -6037,7 +6144,7 @@ y座標を (10) ずつ変える :: motion
             <div class="code-example">
                 <h4>🧩 長さを調べるブロック</h4>
                 <div class="block-example">
-                    <div class="scratch-block variables">[好きな色] の長さ</div>
+                    <pre class="blocks">[好きな色 v] の長さ :: list</pre>
                     <div class="explanation">
                         <strong>リストの長さ：</strong><br>
                         • リストに入っているデータの個数を教えてくれる<br>
@@ -6050,10 +6157,13 @@ y座標を (10) ずつ変える :: motion
             <div class="practical-example">
                 <h4>🎮 実用例：在庫チェック</h4>
                 <div class="block-sequence">
-                    <div class="scratch-block control">もし <span class="scratch-block variables">[アイテムリスト] の長さ</span> > (0) なら</div>
-                    <div class="scratch-block looks">まだアイテムがあります！ と言う</div>
-                    <div class="scratch-block control">でなければ</div>
-                    <div class="scratch-block looks">アイテムがありません... と言う</div>
+                    <pre class="blocks">
+if <([アイテムリスト v] の長さ) > (0)> then
+(まだアイテムがあります！) と言う :: looks
+else
+(アイテムがありません...) と言う :: looks
+end
+                    </pre>
                 </div>
                 <p>リストが空かどうかをチェックして、メッセージを変える！</p>
             </div>
@@ -6080,7 +6190,7 @@ y座標を (10) ずつ変える :: motion
             <div class="code-example">
                 <h4>🧩 検索するブロック</h4>
                 <div class="block-example">
-                    <div class="scratch-block variables">[好きな色] に (赤) が含まれる</div>
+                    <pre class="blocks"><[好きな色 v] に (赤) が含まれる> :: list</pre>
                     <div class="explanation">
                         <strong>含まれるかチェック：</strong><br>
                         • 指定したデータがリストにあるかチェック<br>
@@ -6090,7 +6200,7 @@ y座標を (10) ずつ変える :: motion
                 </div>
 
                 <div class="block-example">
-                    <div class="scratch-block variables">[好きな色] 内の (赤) の位置</div>
+                    <pre class="blocks">([好きな色 v] 内の (赤) の位置) :: list</pre>
                     <div class="explanation">
                         <strong>位置を調べる：</strong><br>
                         • データがリストの何番目にあるか教えてくれる<br>
@@ -6102,10 +6212,13 @@ y座標を (10) ずつ変える :: motion
             <div class="practical-example">
                 <h4>🎮 実用例：プレイヤー名前チェック</h4>
                 <div class="block-sequence">
-                    <div class="scratch-block control">もし <span class="scratch-block variables">[VIPリスト] に <span class="scratch-block variables">(プレイヤー名)</span> が含まれる</span> なら</div>
-                    <div class="scratch-block looks">VIPプレイヤーさん、いらっしゃいませ！ と言う</div>
-                    <div class="scratch-block control">でなければ</div>
-                    <div class="scratch-block looks">ようこそ！ と言う</div>
+                    <pre class="blocks">
+if <[VIPリスト v] に (プレイヤー名) が含まれる> then
+(VIPプレイヤーさん、いらっしゃいませ！) と言う :: looks
+else
+(ようこそ！) と言う :: looks
+end
+                    </pre>
                 </div>
                 <p>VIPリストに名前があるかで、挨拶を変える特別なシステム！</p>
             </div>
@@ -6127,11 +6240,13 @@ y座標を (10) ずつ変える :: motion
             <div class="game-example">
                 <h4>🎯 例1：クイズゲーム</h4>
                 <div class="block-sequence">
-                    <div class="scratch-block variables">(東京) を [都市リスト] に追加する</div>
-                    <div class="scratch-block variables">(大阪) を [都市リスト] に追加する</div>
-                    <div class="scratch-block variables">(京都) を [都市リスト] に追加する</div>
-                    <div class="scratch-block variables">(問題の都市) を <span class="scratch-block variables">[都市リスト] の (ランダム) 番目</span> にする</div>
-                    <div class="scratch-block looks">(問題の都市) はどこの都道府県？ と聞いて待つ</div>
+                    <pre class="blocks">
+(東京) を [都市リスト v] に追加する :: list
+(大阪) を [都市リスト v] に追加する :: list
+(京都) を [都市リスト v] に追加する :: list
+[問題の都市 v] を ([都市リスト v] の (ランダム) 番目) にする :: variables
+((問題の都市) はどこの都道府県？) と聞いて待つ :: sensing
+                    </pre>
                 </div>
                 <p>ランダムに都市名が出題される地理クイズ！</p>
             </div>
@@ -6139,11 +6254,14 @@ y座標を (10) ずつ変える :: motion
             <div class="game-example">
                 <h4>🛡️ 例2：アイテム管理システム</h4>
                 <div class="block-sequence">
-                    <div class="scratch-block variables">(剣) を [アイテム] に追加する</div>
-                    <div class="scratch-block variables">(盾) を [アイテム] に追加する</div>
-                    <div class="scratch-block control">もし <span class="scratch-block variables">[アイテム] に (薬) が含まれる</span> なら</div>
-                    <div class="scratch-block variables">(HP) を (100) にする</div>
-                    <div class="scratch-block looks">薬を使って回復した！ と言う</div>
+                    <pre class="blocks">
+(剣) を [アイテム v] に追加する :: list
+(盾) を [アイテム v] に追加する :: list
+if <[アイテム v] に (薬) が含まれる> then
+[HP v] を (100) にする :: variables
+(薬を使って回復した！) と言う :: looks
+end
+                    </pre>
                 </div>
                 <p>プレイヤーの持ち物をチェックして、アイテムを使うRPG風システム！</p>
             </div>
@@ -6151,11 +6269,13 @@ y座標を (10) ずつ変える :: motion
             <div class="game-example">
                 <h4>🎵 例3：音楽ゲーム</h4>
                 <div class="block-sequence">
-                    <div class="scratch-block variables">(ド) を [音階リスト] に追加する</div>
-                    <div class="scratch-block variables">(レ) を [音階リスト] に追加する</div>
-                    <div class="scratch-block variables">(ミ) を [音階リスト] に追加する</div>
-                    <div class="scratch-block control">(5) 回繰り返す</div>
-                    <div class="scratch-block sound">[音階リスト] の (ランダム) 番目 の音を鳴らす</div>
+                    <pre class="blocks">
+(ド) を [音階リスト v] に追加する :: list
+(レ) を [音階リスト v] に追加する :: list
+(ミ) を [音階リスト v] に追加する :: list
+(5) 回繰り返す :: control
+([音階リスト v] の (ランダム) 番目) の音を鳴らす :: sound
+                    </pre>
                 </div>
                 <p>ランダムに音階が鳴る、音楽創作ゲーム！</p>
             </div>
@@ -6211,21 +6331,28 @@ y座標を (10) ずつ変える :: motion
                     <div class="step-item">
                         <strong>ステップ3：</strong> おみくじを引くプログラム
                         <div class="mini-code">
-                            <div class="scratch-block variables">(今回の運勢) を <span class="scratch-block variables">[運勢リスト] の (ランダム) 番目</span> にする</div>
-                            <div class="scratch-block variables">(今回の運勢) を [結果履歴] に追加する</div>
+                            <pre class="blocks">
+[今回の運勢 v] を ([運勢リスト v] の (ランダム) 番目) にする :: variables
+(今回の運勢) を [結果履歴 v] に追加する :: list
+                            </pre>
                         </div>
                     </div>
                     <div class="step-item">
                         <strong>ステップ4：</strong> 特別メッセージを作る
                         <div class="mini-code">
-                            <div class="scratch-block control">もし <span class="scratch-block variables">(今回の運勢)</span> = (大吉) なら</div>
-                            <div class="scratch-block looks">🎉 素晴らしい！最高の一日になりそう！ と言う</div>
+                            <pre class="blocks">
+if <(今回の運勢) = (大吉)> then
+(🎉 素晴らしい！最高の一日になりそう！) と言う :: looks
+end
+                            </pre>
                         </div>
                     </div>
                     <div class="step-item">
                         <strong>ステップ5：</strong> 統計機能を追加
                         <div class="mini-code">
-                            <div class="scratch-block looks">[結果履歴] の長さ と (回おみくじを引きました) と言う</div>
+                            <pre class="blocks">
+(([結果履歴 v] の長さ) と (回おみくじを引きました)) と言う :: looks
+                            </pre>
                         </div>
                     </div>
                 </div>
@@ -6579,8 +6706,7 @@ y座標を (10) ずつ変える :: motion
         </div>
     </div>
 
-    <script src="https://scratchblocks.github.io/js/scratchblocks-v3.6.3-min.js"></script>
-    <link rel="stylesheet" href="https://scratchblocks.github.io/css/scratchblocks-v3.6.3.css">
+    <!-- scratchblocksライブラリは削除：カスタムCSSブロックシステムを使用 -->
     
     <script>
         let currentStep = 1;
@@ -6596,32 +6722,14 @@ y座標を (10) ずつ変える :: motion
         }
         
         function initializeBlocks() {
-            setTimeout(() => {
-                if (typeof scratchblocks !== 'undefined') {
-                    try {
-                        // Use English blocks with proper category syntax
-                        scratchblocks.renderMatching('pre.blocks', {
-                            languages: ['en'],
-                            scale: 1.0, /* スケールを大きくしてブロックを見やすく */
-                            style: 'scratch3',
-                            wrap: true /* 自動折り返しを有効 */
-                        });
-                        blocksLoaded = true;
-                        updateStatus('ブロック読み込み完了！', 'success');
-                        console.log('Blocks rendered successfully');
-                    } catch (e) {
-                        console.error('Error rendering blocks:', e);
-                        updateStatus('ブロック描画エラー', 'error');
-                    }
-                } else {
-                    updateStatus('ライブラリ読み込み失敗', 'error');
-                }
-            }, 1000);
+            // カスタムCSSブロックシステム使用：外部ライブラリ不要
+            blocksLoaded = true;
+            updateStatus('カスタムブロック描画完了！', 'success');
+            console.log('Custom CSS blocks loaded successfully');
         }
         
         function renderBlocks() {
-            // Disable re-rendering to preserve correct colors
-            // Only render once during initialization
+            // カスタムCSSブロックシステム：再描画不要
             return;
         }
         
@@ -6746,23 +6854,9 @@ y座標を (10) ずつ変える :: motion
                 updateIfElseStep();
             }
             
-            // 条件分岐ページでは初回のみレンダリング、既に読み込み済みなら実行しない
+            // カスタムCSSブロックシステム使用：外部ライブラリ不要
             if (!blocksLoaded) {
-                setTimeout(() => {
-                    if (typeof scratchblocks !== 'undefined') {
-                        try {
-                            scratchblocks.renderMatching('pre.blocks', {
-                                languages: ['en'],
-                                scale: 1.0, /* スケールを大きくしてブロックを見やすく */
-                                style: 'scratch3',
-                                wrap: true /* 自動折り返しを有効 */
-                            });
-                            console.log('Conditional blocks rendered successfully');
-                        } catch (e) {
-                            console.error('Error rendering conditional blocks:', e);
-                        }
-                    }
-                }, 300);
+                console.log('Custom CSS blocks already loaded');
             }
         }
         
@@ -8623,7 +8717,10 @@ y座標を (10) ずつ変える :: motion
                 'backgroundSwitching',
                 // Message sections
                 'messages-send-section',
-                'messages-send-and-wait-section'
+                'messages-send-and-wait-section',
+                // List sections
+                'listBasicsAndOperations',
+                'listUsageAndApplications'
             ];
             
             elements.forEach(id => {
@@ -10172,7 +10269,22 @@ y座標を (10) ずつ変える :: motion
                 'basic-clone-section',
                 'clone-movement-section',
                 'clone-deletion-section',
-                'clone-applications-section'
+                'clone-applications-section',
+                // New sections
+                'sounds-menu',
+                'messages-menu',
+                'backgrounds-menu',
+                'lists-menu',
+                'pen-menu',
+                // Background sections
+                'backgroundBasics',
+                'backgroundSwitching',
+                // Message sections
+                'messages-send-section',
+                'messages-send-and-wait-section',
+                // List sections
+                'listBasicsAndOperations',
+                'listUsageAndApplications'
             ];
             
             elements.forEach(id => {
@@ -10239,18 +10351,26 @@ y座標を (10) ずつ変える :: motion
                 'clone-movement-section',
                 'clone-deletion-section',
                 'clone-applications-section',
-                // New menu sections
+                // New sections
                 'sounds-menu',
                 'messages-menu',
+                'backgrounds-menu',
+                'lists-menu',
+                'pen-menu',
+                // Background sections
+                'backgroundBasics',
+                'backgroundSwitching',
+                // Message sections
                 'messages-send-section',
                 'messages-send-and-wait-section',
+                // List sections
+                'listBasicsAndOperations',
+                'listUsageAndApplications',
+                // Message practice sections
                 'messages-send-practice1',
                 'messages-send-practice2',
                 'messages-wait-practice1',
-                'messages-wait-practice2',
-                'backgrounds-menu',
-                'lists-menu',
-                'pen-menu'
+                'messages-wait-practice2'
             ];
             
             elements.forEach(id => {
