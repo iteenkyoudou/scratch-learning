@@ -319,6 +319,37 @@
                 min-width: 1100px; /* モバイルでのscratchblocks最低幅も大幅増加 */
             }
             
+            /* pre.blocks要素のフォールバックスタイル（Scratchblocksが読み込まれない場合用） */
+            pre.blocks {
+                background: linear-gradient(135deg, #4C97FF 0%, #3D7ECC 100%);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 20px;
+                font-family: 'Helvetica Neue', Arial, sans-serif;
+                font-size: 14px;
+                font-weight: bold;
+                display: inline-block;
+                margin: 8px 0;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+                border: 2px solid rgba(255,255,255,0.3);
+                text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+                line-height: 1.4;
+                white-space: pre-wrap;
+                min-width: 200px;
+            }
+            
+            /* Scratchblocksが正常に読み込まれた場合はフォールバックスタイルを無効化 */
+            .scratchblocks-loaded pre.blocks {
+                background: none;
+                color: inherit;
+                padding: 0;
+                border-radius: 0;
+                box-shadow: none;
+                border: none;
+                text-shadow: none;
+                display: block;
+            }
+            
             pre.blocks {
                 font-size: 12px; /* モバイルでさらに小さなフォント */
                 padding: 10px;
@@ -11034,6 +11065,9 @@ end
                             languages: ['ja'],
                             scale: 0.8
                         });
+                        
+                        // 成功したらbodyにクラスを追加してフォールバックスタイルを無効化
+                        document.body.classList.add('scratchblocks-loaded');
                         console.log('✅ Scratchblocks initialized successfully');
                         return true;
                     } catch (error) {
