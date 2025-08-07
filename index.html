@@ -238,13 +238,6 @@
                 0 1px 0 rgba(255,255,255,0.2),
                 0 1px 3px rgba(0,0,0,0.15);
         }
-        .scratch-block.sound { 
-            background: #CF63CF;
-            box-shadow: 
-                inset 0 1px 0 #E094E0,
-                0 1px 0 rgba(255,255,255,0.2),
-                0 1px 3px rgba(0,0,0,0.15);
-        }
         .scratch-block.events { 
             background: #FFD500;
             color: #333;
@@ -1168,11 +1161,6 @@
                 </div>
                 
                 <!-- 新機能追加 -->
-                <div class="lesson-card" onclick="showSoundsMenu()">
-                    <div class="emoji">🎵</div>
-                    <div class="lesson-title">音と音楽</div>
-                    <div class="lesson-desc">音を鳴らして楽しいプログラムを作ろう！</div>
-                </div>
                 <div class="lesson-card" onclick="showMessagesMenu()">
                     <div class="emoji">📢</div>
                     <div class="lesson-title">メッセージ機能</div>
@@ -1187,11 +1175,6 @@
                     <div class="emoji">📋</div>
                     <div class="lesson-title">リスト</div>
                     <div class="lesson-desc">たくさんのデータを整理して使おう！</div>
-                </div>
-                <div class="lesson-card" onclick="showPenMenu()">
-                    <div class="emoji">✏️</div>
-                    <div class="lesson-title">ペン機能</div>
-                    <div class="lesson-desc">線や図形を描いて芸術作品を作ろう！</div>
                 </div>
             </div>
         </div>
@@ -5049,42 +5032,6 @@ y座標を (10) ずつ変える :: motion
         </div>
     </div>
 
-    <!-- 音と音楽メニュー -->
-    <div id="sounds-menu" style="display: none;">
-        <div class="container">
-            <div class="header">
-                <h1>🎵 音と音楽</h1>
-                <p>音楽や効果音を使って、楽しいプログラムを作ろう！</p>
-            </div>
-
-            <div class="lesson-grid">
-                <div class="lesson-card" onclick="showBasicSounds()">
-                    <div class="emoji">🔊</div>
-                    <div class="lesson-title">基本的な音</div>
-                    <div class="lesson-desc">音を鳴らすブロックを使おう！</div>
-                </div>
-                <div class="lesson-card" onclick="showMusicInstruments()">
-                    <div class="emoji">🎺</div>
-                    <div class="lesson-title">楽器の音</div>
-                    <div class="lesson-desc">色々な楽器の音を鳴らそう！</div>
-                </div>
-                <div class="lesson-card" onclick="showSoundEffects()">
-                    <div class="emoji">🎭</div>
-                    <div class="lesson-title">効果音</div>
-                    <div class="lesson-desc">ゲームや劇の効果音を作ろう！</div>
-                </div>
-                <div class="lesson-card" onclick="showMusicControl()">
-                    <div class="emoji">🎛️</div>
-                    <div class="lesson-title">音楽の制御</div>
-                    <div class="lesson-desc">テンポや音量を調整しよう！</div>
-                </div>
-            </div>
-
-            <div class="step-nav">
-                <button class="btn" onclick="showHome()" style="background: #666;">ホームに戻る</button>
-            </div>
-        </div>
-    </div>
 
     <!-- メッセージ機能メニュー -->
     <div id="messages-menu" style="display: none;">
@@ -6479,42 +6426,6 @@ end
         </div>
     </div>
 
-    <!-- ペン機能メニュー -->
-    <div id="pen-menu" style="display: none;">
-        <div class="container">
-            <div class="header">
-                <h1>✏️ ペン機能</h1>
-                <p>ペンを使って、線や図形を描いてアート作品を作ろう！</p>
-            </div>
-
-            <div class="lesson-grid">
-                <div class="lesson-card" onclick="showPenBasics()">
-                    <div class="emoji">🖊️</div>
-                    <div class="lesson-title">ペンの基本</div>
-                    <div class="lesson-desc">ペンを下ろして線を描こう！</div>
-                </div>
-                <div class="lesson-card" onclick="showPenColors()">
-                    <div class="emoji">🌈</div>
-                    <div class="lesson-title">色と太さ</div>
-                    <div class="lesson-desc">ペンの色と太さを変えよう！</div>
-                </div>
-                <div class="lesson-card" onclick="showShapeDrawing()">
-                    <div class="emoji">🔺</div>
-                    <div class="lesson-title">図形を描く</div>
-                    <div class="lesson-desc">三角形や四角形を描こう！</div>
-                </div>
-                <div class="lesson-card" onclick="showArtCreation()">
-                    <div class="emoji">🎨</div>
-                    <div class="lesson-title">アート作品</div>
-                    <div class="lesson-desc">自由に絵を描いて作品を作ろう！</div>
-                </div>
-            </div>
-
-            <div class="step-nav">
-                <button class="btn" onclick="showHome()" style="background: #666;">ホームに戻る</button>
-            </div>
-        </div>
-    </div>
 
     <!-- 背景の基本セクション -->
     <div id="backgroundBasics" style="display: none;">
@@ -8803,11 +8714,9 @@ end
                 'clone-deletion-section',
                 'clone-applications-section',
                 // New sections
-                'sounds-menu',
                 'messages-menu',
                 'backgrounds-menu',
                 'lists-menu',
-                'pen-menu',
                 // Background sections
                 'backgroundBasics',
                 'backgroundSwitching',
@@ -10367,11 +10276,9 @@ end
                 'clone-deletion-section',
                 'clone-applications-section',
                 // New sections
-                'sounds-menu',
                 'messages-menu',
                 'backgrounds-menu',
                 'lists-menu',
-                'pen-menu',
                 // Background sections
                 'backgroundBasics',
                 'backgroundSwitching',
@@ -10448,11 +10355,9 @@ end
                 'clone-deletion-section',
                 'clone-applications-section',
                 // New sections
-                'sounds-menu',
                 'messages-menu',
                 'backgrounds-menu',
                 'lists-menu',
-                'pen-menu',
                 // Background sections
                 'backgroundBasics',
                 'backgroundSwitching',
@@ -10733,14 +10638,6 @@ end
         };
 
         // 新機能のメニュー表示関数
-        function showSoundsMenu() {
-            hideAllViews();
-            document.getElementById('sounds-menu').style.display = 'block';
-            updateProgress('sounds-menu', 0);
-            
-            // 履歴管理
-            updateHistory('sounds-menu', '音');
-        }
 
         function showMessagesMenu() {
             hideAllViews();
@@ -10780,23 +10677,7 @@ end
             updateHistory('lists-menu', 'リスト');
         }
 
-        function showPenMenu() {
-            hideAllViews();
-            document.getElementById('pen-menu').style.display = 'block';
-            updateProgress('pen-menu', 0);
-            
-            // 履歴管理
-            updateHistory('pen-menu', 'ペン');
-        }
 
-        // 音楽機能の個別レッスン関数
-        function showBasicSounds() {
-            alert('🔊 基本的な音\n\n・「音を鳴らす」ブロックの使い方\n・効果音の選び方\n・音の長さの調整\n\n（実装準備中）');
-        }
-
-        function showMusicInstruments() {
-            alert('🎺 楽器の音\n\n・楽器の種類を選ぶ\n・音階を変える\n・楽器の組み合わせ\n\n（実装準備中）');
-        }
 
         function showSoundEffects() {
             alert('🎭 効果音\n\n・ゲーム用効果音\n・動作に合わせた音\n・オリジナル効果音\n\n（実装準備中）');
@@ -10913,14 +10794,6 @@ end
             currentStep = step;
         }
 
-        // ペン機能の個別レッスン関数
-        function showPenBasics() {
-            alert('🖊️ ペンの基本\n\n・ペンを下ろす/上げる\n・線を描く\n・ペンの設定\n\n（実装準備中）');
-        }
-
-        function showPenColors() {
-            alert('🌈 色と太さ\n\n・ペンの色を変える\n・ペンの太さを変える\n・グラデーション効果\n\n（実装準備中）');
-        }
 
         function showShapeDrawing() {
             alert('🔺 図形を描く\n\n・三角形や四角形\n・円を描く\n・複雑な図形\n\n（実装準備中）');
@@ -11053,9 +10926,6 @@ end
                 case 'clones-menu':
                     showClonesMenu();
                     break;
-                case 'sounds-menu':
-                    showSoundsMenu();
-                    break;
                 case 'messages-menu':
                     showMessagesMenu();
                     break;
@@ -11064,9 +10934,6 @@ end
                     break;
                 case 'lists-menu':
                     showListsMenu();
-                    break;
-                case 'pen-menu':
-                    showPenMenu();
                     break;
                 case 'messages-send-practice1':
                     showMessagesSendPractice1();
