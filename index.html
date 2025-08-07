@@ -1143,7 +1143,7 @@
                 
                 <div class="blocks-grid">
                     <div class="block-item">
-                        <div class="scratch-block events hat">🏁 緑の旗がクリックされたとき</div>
+                        <pre class="blocks">緑の旗がクリックされたとき</pre>
                         <div class="japanese-label">プログラムのはじまり（みどりのはたブロック）<br><strong>📊 必要な個数: 1個</strong></div>
                     </div>
                     <div class="block-item">
@@ -1180,16 +1180,16 @@
                 
                 <div class="block-container">
                     <h4>🎯 くみたてかた:</h4>
-                    <div class="scratch-stack">
-                        <div class="scratch-block events hat">🏁 緑の旗がクリックされたとき</div>
-                        <div class="scratch-block looks"><span class="scratch-input">こんにちは！</span> と言う</div>
-                        <div class="scratch-block control"><span class="scratch-input">1</span> 秒待つ</div>
-                        <div class="scratch-block motion"><span class="scratch-input">50</span> 歩動かす</div>
-                        <div class="scratch-block control"><span class="scratch-input">1</span> 秒待つ</div>
-                        <div class="scratch-block motion">右に <span class="scratch-input">90</span> 度回す</div>
-                        <div class="scratch-block control"><span class="scratch-input">1</span> 秒待つ</div>
-                        <div class="scratch-block looks"><span class="scratch-input">さようなら！</span> と言う</div>
-                    </div>
+                    <pre class="blocks">
+緑の旗がクリックされたとき
+[こんにちは！] と言う
+(1) 秒待つ
+(50) 歩動かす
+(1) 秒待つ
+右に (90) 度回す
+(1) 秒待つ
+[さようなら！] と言う
+                    </pre>
                 </div>
 
                 <div class="info-box success">
@@ -6706,7 +6706,8 @@ end
         </div>
     </div>
 
-    <!-- scratchblocksライブラリは削除：カスタムCSSブロックシステムを使用 -->
+    <!-- Scratchblocks.js ライブラリ -->
+    <script src="https://unpkg.com/scratchblocks@3.6.3/dist/scratchblocks.min.js"></script>
     
     <script>
         let currentStep = 1;
@@ -11011,7 +11012,34 @@ end
                 console.log(`Initial hash detected: ${hash}`);
                 showSectionById(hash);
             }
+            
+            // Scratchblocks初期化
+            initializeScratchBlocks();
         });
+
+        // Scratchblocksの初期化と日本語設定
+        function initializeScratchBlocks() {
+            // ライブラリの読み込みを待つ
+            setTimeout(() => {
+                if (typeof scratchblocks !== 'undefined') {
+                    try {
+                        // すべてのpre.blocksをレンダリング
+                        scratchblocks.renderMatching('pre.blocks', {
+                            style: 'scratch3',
+                            languages: ['ja'],
+                            scale: 0.75
+                        });
+                        console.log('Scratchblocks initialized successfully');
+                    } catch (error) {
+                        console.error('Scratchblocks rendering error:', error);
+                    }
+                } else {
+                    console.error('Scratchblocks library not loaded');
+                    // フォールバック: ライブラリが読み込まれていない場合は再試行
+                    setTimeout(initializeScratchBlocks, 1000);
+                }
+            }, 500);
+        }
 
     </script>
 </body>
