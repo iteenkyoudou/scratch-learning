@@ -1143,7 +1143,7 @@
                 
                 <div class="blocks-grid">
                     <div class="block-item">
-                        <pre class="blocks">緑の旗がクリックされたとき</pre>
+                        <pre class="blocks">when green flag clicked</pre>
                         <div class="japanese-label">プログラムのはじまり（みどりのはたブロック）<br><strong>📊 必要な個数: 1個</strong></div>
                     </div>
                     <div class="block-item">
@@ -1181,14 +1181,14 @@
                 <div class="block-container">
                     <h4>🎯 くみたてかた:</h4>
                     <pre class="blocks">
-緑の旗がクリックされたとき
-[こんにちは！] と言う
-(1) 秒待つ
-(50) 歩動かす
-(1) 秒待つ
-右に (90) 度回す
-(1) 秒待つ
-[さようなら！] と言う
+when green flag clicked
+say [こんにちは！]
+wait (1) seconds
+move (50) steps
+wait (1) seconds
+turn right (90) degrees
+wait (1) seconds
+say [さようなら！]
                     </pre>
                 </div>
 
@@ -6707,7 +6707,7 @@ end
     </div>
 
     <!-- Scratchblocks.js ライブラリ -->
-    <script src="https://unpkg.com/scratchblocks@3.6.3/dist/scratchblocks.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/scratchblocks@3.6.3/dist/scratchblocks.min.js"></script>
     
     <script>
         let currentStep = 1;
@@ -11017,28 +11017,57 @@ end
             initializeScratchBlocks();
         });
 
-        // Scratchblocksの初期化と日本語設定
+        // Scratchblocksの初期化
         function initializeScratchBlocks() {
-            // ライブラリの読み込みを待つ
-            setTimeout(() => {
+            let attempts = 0;
+            const maxAttempts = 5;
+            
+            function tryInitialize() {
+                attempts++;
+                console.log(`Attempting to initialize Scratchblocks (attempt ${attempts})`);
+                
                 if (typeof scratchblocks !== 'undefined') {
                     try {
                         // すべてのpre.blocksをレンダリング
                         scratchblocks.renderMatching('pre.blocks', {
                             style: 'scratch3',
                             languages: ['ja'],
-                            scale: 0.75
+                            scale: 0.8
                         });
-                        console.log('Scratchblocks initialized successfully');
+                        console.log('✅ Scratchblocks initialized successfully');
+                        return true;
                     } catch (error) {
-                        console.error('Scratchblocks rendering error:', error);
+                        console.error('❌ Scratchblocks rendering error:', error);
+                        return false;
                     }
                 } else {
-                    console.error('Scratchblocks library not loaded');
-                    // フォールバック: ライブラリが読み込まれていない場合は再試行
-                    setTimeout(initializeScratchBlocks, 1000);
+                    console.warn(`⚠️ Scratchblocks library not loaded (attempt ${attempts}/${maxAttempts})`);
+                    if (attempts < maxAttempts) {
+                        setTimeout(tryInitialize, 1000);
+                    } else {
+                        console.error('❌ Failed to load Scratchblocks after multiple attempts');
+                    }
+                    return false;
                 }
-            }, 500);
+            }
+            
+            // 最初の試行
+            setTimeout(tryInitialize, 500);
+        }
+        
+        // セクション表示時にもブロックを再レンダリング
+        function renderBlocksInSection() {
+            if (typeof scratchblocks !== 'undefined') {
+                try {
+                    scratchblocks.renderMatching('pre.blocks', {
+                        style: 'scratch3',
+                        languages: ['ja'],
+                        scale: 0.8
+                    });
+                } catch (error) {
+                    console.error('Block rendering error:', error);
+                }
+            }
         }
 
     </script>
